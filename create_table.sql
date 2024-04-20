@@ -192,7 +192,7 @@ CREATE TABLE dich_vu_luu_tru (
 );
 CREATE TABLE phong_benh (
 	So_phong			CHAR(10) PRIMARY KEY,
-    Loai_phong			NVARCHAR(100),
+    Loai_phong			INT,
     So_luong_benh_nhan_hien_tai	    INT
 );
 CREATE TABLE phong_benh_duoc_su_dung_tai_dich_vu_luu_tru (
