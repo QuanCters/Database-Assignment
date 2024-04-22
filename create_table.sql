@@ -1,4 +1,4 @@
-CREATE DATABASE assignment2;
+﻿CREATE DATABASE assignment2;
 GO
 SET DATEFORMAT dmy;
 USE assignment2;
