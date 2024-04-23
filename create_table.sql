@@ -187,7 +187,6 @@ CREATE TABLE dich_vu_luu_tru (
     Ngay_bat_dau	DATE,
     Ngay_ket_thuc	DATE,
     Tong_chi_phi	INT,
-    Tien_nghi		NVARCHAR(100),
     FOREIGN KEY (Ma_so) REFERENCES lan_su_dung_dich_vu(Ma_so)
 );
 CREATE TABLE phong_benh (
