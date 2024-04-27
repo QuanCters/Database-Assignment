@@ -1,3 +1,5 @@
+DROP PROCEDURE IF EXISTS Proc_SelectDoctorsBySpecialty;
+Go
 CREATE PROCEDURE Proc_SelectDoctorsBySpecialty
     @Specialty NVARCHAR(50)
 AS
@@ -8,7 +10,7 @@ BEGIN
     WHERE bs.Chuyen_khoa = @Specialty
     ORDER BY nv.Ten;
 END;
-DROP PROCEDURE IF EXISTS Proc_SelectDoctorsBySpecialty;
- execute Proc_SelectDoctorsBySpecialty @Specialty = N'Nội khoa'
+GO
+ execute Proc_SelectDoctorsBySpecialty @Specialty = N'Phục hồi chức năng'
 
 

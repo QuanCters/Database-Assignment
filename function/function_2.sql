@@ -5,7 +5,8 @@ GO
 CREATE FUNCTION Lich_trong (
 @Ho NCHAR(20),
 @Ten NCHAR(10),
-@Ngay DATE
+@Ngay DATE,
+@Ca NCHAR(10)
 ) 
 RETURNS @Lich_trong TABLE (
 So_hieu_ca_lam_viec CHAR(10),
@@ -30,20 +31,28 @@ BEGIN
         DECLARE @Gio_bat_dau TIME; 
         DECLARE @Gio_tan_ca TIME;
 
-        DECLARE Lich_Cursor CURSOR FOR
-        SELECT  lich_hen_kham.So_hieu_ca_lam_viec ,Gio_den_kham
-        FROM lich_hen_kham,  lich_lam_viec 
-        WHERE Ma_so_nhan_vien = @Ma_bac_si AND Ngay= @Ngay;
+		IF @Ca = 'Ca 1'
+		BEGIN
+			set @Gio_vao = '07:00:00';
+			set @Gio_tan_ca = '11:00:00';
+		END
+		ELSE 
+		BEGIN
+			set @Gio_vao = '13:00:00';
+			set @Gio_tan_ca = '17:00:00';
+		END
 
-        SELECT @Gio_tan_ca = Gio_tan_ca FROM lich_lam_viec WHERE @Ma_bac_si = Ma_so_nhan_vien AND @Ngay = Ngay;
-        SELECT @Gio_vao = Gio_vao FROM lich_lam_viec WHERE @Ma_bac_si = Ma_so_nhan_vien AND @Ngay = Ngay
+        DECLARE Lich_Cursor CURSOR FOR
+        SELECT  lich_lam_viec.So_hieu_ca_lam_viec ,Gio_den_kham
+        FROM lich_hen_kham INNER JOIN  lich_lam_viec 
+        ON Ma_so_nhan_vien = @Ma_bac_si AND Ngay= @Ngay AND lich_lam_viec.Gio_vao = @Gio_vao;
 
         OPEN Lich_Cursor;
         FETCH NEXT FROM Lich_Cursor INTO @So_hieu_ca_lam_viec, @Gio_bat_dau ;
 
         WHILE @@FETCH_STATUS = 0
         BEGIN
-            IF @Gio_vao != @Gio_bat_dau AND @Gio_vao != @Gio_tan_ca
+            IF @Gio_vao != @Gio_bat_dau AND @Gio_vao < @Gio_tan_ca
             BEGIN
                 WHILE @Gio_vao < @Gio_bat_dau
                 BEGIN
@@ -64,4 +73,6 @@ END
 
 GO
 
-SELECT * FROM Lich_trong('Nguyen', 'Van A', '2023-01-02');
+-- SELECT * FROM Lich_trong(N'Nguyễn', N'Văn A', '2024-04-14','Ca 1');
+SELECT * FROM Lich_trong(N'Trần', N'Thị B', '2024-04-14', 'Ca 2');
+SELECT * FROM lich_hen_kham
