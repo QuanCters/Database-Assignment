@@ -11,6 +11,6 @@ BEGIN
     ORDER BY nv.Ten;
 END;
 GO
- execute Proc_SelectDoctorsBySpecialty @Specialty = N'Phục hồi chức năng'
+ execute Proc_SelectDoctorsBySpecialty @Specialty = N'Nội Khoa'
 
 
