@@ -5,20 +5,19 @@ CREATE PROCEDURE Proc_GetDoctorAppointmentsAndServices
     @AppointmentMonth INT
 AS
 BEGIN
-    -- Lấy số lượng lịch hẹn khám cho từng bác sĩ và số lượng dịch vụ được thực hiện
     SELECT
         bs.Ma_so_nhan_vien AS DoctorID,
         nv.Ho AS LastName,
         nv.Ten AS FirstName,
         bs.Bang_cap AS BangCap,
         bs.Chuc_vu AS ChucVu,
-        COUNT(lhk.Ma_lich_hen_kham) AS AppointmentCount,
-        COUNT(lsddv.Ma_so) AS ServiceCount,
-        COUNT(lhk.Ma_lich_hen_kham) + COUNT(lsddv.Ma_so) AS TotalCount
+        COUNT(DISTINCT lhk.Ma_lich_hen_kham) AS AppointmentCount,
+        COUNT(DISTINCT lsddv.Ma_so) AS ServiceCount,
+        COUNT(DISTINCT lhk.Ma_lich_hen_kham) + COUNT(DISTINCT lsddv.Ma_so) AS TotalCount
     FROM
-        nhan_vien nv
+        bac_si bs
     INNER JOIN
-        bac_si bs ON nv.Ma_so_nhan_vien = bs.Ma_so_nhan_vien
+        nhan_vien nv ON nv.Ma_so_nhan_vien = bs.Ma_so_nhan_vien
     LEFT JOIN
         lich_lam_viec llv ON bs.Ma_so_nhan_vien = llv.Ma_so_nhan_vien
     LEFT JOIN
@@ -32,9 +31,10 @@ BEGIN
     GROUP BY
         bs.Ma_so_nhan_vien, nv.Ho, nv.Ten, bs.Chuc_vu, bs.Bang_cap
     HAVING
-        (COUNT(lhk.Ma_lich_hen_kham) + COUNT(lsddv.Ma_so)) > 0
+        (COUNT(DISTINCT lhk.Ma_lich_hen_kham) + COUNT(DISTINCT lsddv.Ma_so)) > 0
     ORDER BY
         TotalCount DESC;
 END;
+
 GO
 EXECUTE Proc_GetDoctorAppointmentsAndServices @AppointmentMonth = 04
