@@ -11,7 +11,8 @@ CREATE PROCEDURE insert_nhan_vien (
 	@Email NVARCHAR(255),
 	@Ngay_ky_hop_dong DATE,
 	@Luong INT,
-	@Ngay_sinh DATE
+	@Ngay_sinh DATE,
+	@SDT CHAR(10)
 )
 AS
 BEGIN
@@ -45,9 +46,17 @@ BEGIN
 		PRINT 'Them nhân vien khong thanh cong do nhan vien do nhan vien chua du 18 tuoi.';
 		RETURN 0;
 	END;
+
+	IF LEFT(@SDT, 1) != '0' OR PATINDEX('%[^0-9]%', @SDT) > 0
+	BEGIN
+		PRINT 'Them nhan vien khong thanh cong do so dien thoai khong hop le.';
+		RETURN 0;
+	END;
 	
 	INSERT INTO nhan_vien
-	VALUES (@Ma_so_nhan_vien, @CCCD, @Ho, @Ten, @Gioi_tinh, @Dia_chi, @Email, @Ngay_ky_hop_dong, @Luong, @Ngay_sinh);
+	VALUES (@Ma_so_nhan_vien, @CCCD, @Ho, @Ten, @Gioi_tinh, @Dia_chi, @Email, @Ngay_ky_hop_dong, @Luong, @Ngay_sinh, @SDT);
+
+	
 
 	PRINT 'Them nhan vien thanh cong';
 END;
