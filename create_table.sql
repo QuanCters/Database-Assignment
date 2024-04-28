@@ -12,12 +12,12 @@ CREATE TABLE nhan_vien (
     Email			NVARCHAR(100),
     Ngay_ky_hop_dong	DATE,
     Luong			INT,
-    Ngay_sinh		DATE
+    Ngay_sinh		DATE,
+    SĐT             CHAR(10)
 );
 CREATE TABLE bac_si (
 	Ma_so_nhan_vien	CHAR(10) PRIMARY KEY,
     Chuc_vu			NVARCHAR(50),
-    Bang_cap		NVARCHAR(50),
     Chuyen_khoa		NVARCHAR(50),
     Chuc_danh       NVARCHAR(50),
     Ma_so_quan_ly	CHAR(10),
@@ -28,7 +28,7 @@ CREATE TABLE bang_cap_bac_si (
 	Ma_so_nhan_vien	CHAR(10),
     Bang_cap		NVARCHAR(50),
     PRIMARY KEY (Ma_so_nhan_vien, Bang_cap),
-    FOREIGN KEY (Ma_so_nhan_vien) REFERENCES nhan_vien(Ma_so_nhan_vien)
+    FOREIGN KEY (Ma_so_nhan_vien) REFERENCES bac_si(Ma_so_nhan_vien)
 );
 CREATE TABLE lich_lam_viec (
 	So_hieu_ca_lam_viec	CHAR(10) PRIMARY KEY,
@@ -52,7 +52,8 @@ CREATE TABLE benh_nhan (
     Dia_chi			NVARCHAR(255),
     Email			VARCHAR(100),
     Gioi_tinh 		NVARCHAR(3) CHECK (Gioi_tinh = 'Nam' OR Gioi_tinh = 'Nu'),
-    Ngay_sinh		DATE
+    Ngay_sinh		DATE,
+    SĐT             CHAR(10)
 );
 CREATE TABLE the_bhyt (
 	Ma_bhyt				CHAR(13) PRIMARY KEY,
@@ -75,12 +76,7 @@ CREATE TABLE thong_tin_theo_doi_suc_khoe (
     PRIMARY KEY (Ma_benh_nhan, Ngay, Gio),
     FOREIGN KEY (Ma_benh_nhan) REFERENCES benh_nhan(Ma_benh_nhan)
 );
-CREATE TABLE so_dien_thoai_benh_nhan (
-	Ma_benh_nhan	CHAR(10),
-    So_dien_thoai	CHAR(10) NOT NULL,
-    PRIMARY KEY (Ma_benh_nhan, So_dien_thoai),
-    FOREIGN KEY (Ma_benh_nhan) REFERENCES benh_nhan(Ma_benh_nhan)
-);
+
 CREATE TABLE than_nhan (
 	Ma_benh_nhan	CHAR(10),
     Ten				NVARCHAR(50),
