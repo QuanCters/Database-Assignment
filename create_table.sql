@@ -14,12 +14,6 @@ CREATE TABLE nhan_vien (
     Luong			INT,
     Ngay_sinh		DATE
 );
-CREATE TABLE so_dien_thoai_nhan_vien (
-	Ma_so_nhan_vien	CHAR(10),
-    So_dien_thoai	CHAR(10) NOT NULL,
-    PRIMARY KEY (Ma_so_nhan_vien, So_dien_thoai),
-    FOREIGN KEY (Ma_so_nhan_vien) REFERENCES nhan_vien(Ma_so_nhan_vien)
-);
 CREATE TABLE bac_si (
 	Ma_so_nhan_vien	CHAR(10) PRIMARY KEY,
     Chuc_vu			NVARCHAR(50),
@@ -29,6 +23,12 @@ CREATE TABLE bac_si (
     Ma_so_quan_ly	CHAR(10),
     FOREIGN KEY (Ma_so_nhan_vien) REFERENCES nhan_vien(Ma_so_nhan_vien),
     FOREIGN KEY (Ma_so_quan_ly) REFERENCES bac_si(Ma_so_nhan_vien)
+);
+CREATE TABLE bang_cap_bac_si (
+	Ma_so_nhan_vien	CHAR(10),
+    Bang_cap		NVARCHAR(50),
+    PRIMARY KEY (Ma_so_nhan_vien, Bang_cap),
+    FOREIGN KEY (Ma_so_nhan_vien) REFERENCES nhan_vien(Ma_so_nhan_vien)
 );
 CREATE TABLE lich_lam_viec (
 	So_hieu_ca_lam_viec	CHAR(10) PRIMARY KEY,
