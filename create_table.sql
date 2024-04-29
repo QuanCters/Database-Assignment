@@ -48,7 +48,7 @@ CREATE TABLE benh_nhan (
 	Ma_benh_nhan	CHAR(10) PRIMARY KEY,
     CCCD			CHAR(12),
     Ho				NVARCHAR(20),
-    Ten				NVARCHAR(10),
+    Ten				NVARCHAR(40),
     Dia_chi			NVARCHAR(255),
     Email			VARCHAR(100),
     Gioi_tinh 		NVARCHAR(3) CHECK (Gioi_tinh = 'Nam' OR Gioi_tinh = 'Nu'),
@@ -56,7 +56,7 @@ CREATE TABLE benh_nhan (
     SĐT             CHAR(10)
 );
 CREATE TABLE the_bhyt (
-	Ma_bhyt				CHAR(13) PRIMARY KEY,
+	Ma_bhyt				CHAR(15) PRIMARY KEY,
     Noi_song					NVARCHAR(255),
     Noi_dang_ky_kham_chua_benh	NVARCHAR(100),
     Ma_ki_hieu_muc_huong		CHAR(2),
@@ -72,7 +72,7 @@ CREATE TABLE thong_tin_theo_doi_suc_khoe (
     Chieu_cao			INT,
     Huyet_ap			VARCHAR(10),
     BMI					FLOAT,
-    Phan_loai_suc_khoe	NVARCHAR(10),
+    Phan_loai_suc_khoe	NVARCHAR(30),
     PRIMARY KEY (Ma_benh_nhan, Ngay, Gio),
     FOREIGN KEY (Ma_benh_nhan) REFERENCES benh_nhan(Ma_benh_nhan)
 );
@@ -188,7 +188,7 @@ CREATE TABLE dich_vu_luu_tru (
 CREATE TABLE phong_benh (
 	So_phong			CHAR(10) PRIMARY KEY,
     Loai_phong			INT,
-    So_luong_benh_nhan_hien_tai	    INT
+    So_luong_benh_nhan_hien_tai	    INT  DEFAULT 0
 );
 CREATE TABLE phong_benh_duoc_su_dung_tai_dich_vu_luu_tru (
 	So_phong				CHAR(10),
