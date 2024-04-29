@@ -7,7 +7,7 @@ CREATE TABLE nhan_vien (
     CCCD			CHAR(12),
     Ho				NCHAR(20),
     Ten				NCHAR(10),
-    Gioi_tinh		NVARCHAR(3) CHECK (Gioi_tinh = 'Nam' OR Gioi_tinh = 'Nu'),
+    Gioi_tinh		NVARCHAR(3) CHECK (Gioi_tinh = N'Nam' OR Gioi_tinh = N'Nữ'),
     Dia_chi			NVARCHAR(255),
     Email			NVARCHAR(100),
     Ngay_ky_hop_dong	DATE,
@@ -51,7 +51,7 @@ CREATE TABLE benh_nhan (
     Ten				NVARCHAR(40),
     Dia_chi			NVARCHAR(255),
     Email			VARCHAR(100),
-    Gioi_tinh 		NVARCHAR(3) CHECK (Gioi_tinh = 'Nam' OR Gioi_tinh = 'Nu'),
+    Gioi_tinh 		NVARCHAR(3) CHECK (Gioi_tinh = 'Nam' OR Gioi_tinh = N'Nữ'),
     Ngay_sinh		DATE,
     SĐT             CHAR(10)
 );
@@ -93,7 +93,7 @@ CREATE TABLE lien_lac_cua_than_nhan (
     FOREIGN KEY (Ma_benh_nhan, Ten) REFERENCES than_nhan(Ma_benh_nhan, Ten)
 );
 CREATE TABLE lan_di_benh_vien (
-	Ma_so			CHAR(10) PRIMARY KEY,
+	Ma_so_lan_di_benh_vien			CHAR(10) PRIMARY KEY,
     Gio				TIME,
     Ngay			DATE,
     Tong_chi_phi	INT,
@@ -112,7 +112,7 @@ CREATE TABLE lan_su_dung_dich_vu (
     Ma_so_lan_di_benh_vien	CHAR(10),
     Ma_loai_dich_vu			CHAR(10),
     FOREIGN KEY (Ma_so_nhan_vien) REFERENCES bac_si(Ma_so_nhan_vien),
-    FOREIGN KEY (Ma_so_lan_di_benh_vien) REFERENCES lan_di_benh_vien(Ma_so),
+    FOREIGN KEY (Ma_so_lan_di_benh_vien) REFERENCES lan_di_benh_vien(Ma_so_lan_di_benh_vien),
     FOREIGN KEY (Ma_loai_dich_vu) REFERENCES loai_dich_vu(Ma_loai_dich_vu)
 );
 CREATE TABLE dich_vu_noi_soi (
@@ -184,7 +184,7 @@ CREATE TABLE dich_vu_luu_tru (
     Ngay_ket_thuc	DATE,
     Tong_chi_phi	INT,
     FOREIGN KEY (Ma_so) REFERENCES lan_su_dung_dich_vu(Ma_so)
-);
+); -- đã xóa Tien_nghi NVARCHAR(100)
 CREATE TABLE phong_benh (
 	So_phong			CHAR(10) PRIMARY KEY,
     Loai_phong			INT,
@@ -225,7 +225,7 @@ CREATE TABLE lich_hen_kham (
     Gio_den_kham            TIME,
     Ma_so_lan_di_benh_vien  CHAR(10),
     Ma_benh_nhan	        CHAR(10),
-    FOREIGN KEY (Ma_so_lan_di_benh_vien) REFERENCES lan_di_benh_vien(Ma_so),
+    FOREIGN KEY (Ma_so_lan_di_benh_vien) REFERENCES lan_di_benh_vien(Ma_so_lan_di_benh_vien),
     FOREIGN KEY (Ma_benh_nhan) REFERENCES benh_nhan(Ma_benh_nhan),
     FOREIGN KEY (So_hieu_ca_lam_viec) REFERENCES lich_lam_viec(So_hieu_ca_lam_viec)
 )
