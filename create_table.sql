@@ -111,7 +111,7 @@ CREATE TABLE lan_su_dung_dich_vu (
     Ma_so_nhan_vien			CHAR(10),
     Ma_so_lan_di_benh_vien	CHAR(10),
     Ma_loai_dich_vu			CHAR(10),
-    FOREIGN KEY (Ma_so_nhan_vien) REFERENCES nhan_vien(Ma_so_nhan_vien),
+    FOREIGN KEY (Ma_so_nhan_vien) REFERENCES bac_si(Ma_so_nhan_vien),
     FOREIGN KEY (Ma_so_lan_di_benh_vien) REFERENCES lan_di_benh_vien(Ma_so_lan_di_benh_vien),
     FOREIGN KEY (Ma_loai_dich_vu) REFERENCES loai_dich_vu(Ma_loai_dich_vu)
 );
