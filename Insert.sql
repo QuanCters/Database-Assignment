@@ -1159,212 +1159,182 @@ SELECT * FROM lich_lam_viec
 
 DELETE lich_lam_viec
 
-/*
-INSERT INTO lich_lam_viec (So_hieu_ca_lam_viec, Ngay, Gio_vao, Gio_tan_ca, Ma_so_nhan_vien)
-VALUES 
-('CA01000001', '2024-01-01', '07:00', '07:20', 'BS10001'),
-('CA01000002', '2024-01-01', '07:20', '07:40', 'BS10001'),
-('CA01000003', '2024-01-01', '07:40', '08:00', 'BS10001'),
-('CA01000004', '2024-01-01', '08:00', '08:20', 'BS10001'),
-('CA01000005', '2024-01-01', '08:20', '08:40', 'BS10001'),
-('CA01000006', '2024-01-01', '08:40', '09:00', 'BS10001'),
-('CA01000007', '2024-01-01', '09:00', '09:20', 'BS10001'),
-('CA01000008', '2024-01-01', '09:20', '09:40', 'BS10001'),
-('CA01000009', '2024-01-01', '09:40', '10:00', 'BS10001'),
-('CA01000010', '2024-01-01', '10:00', '10:20', 'BS10001'),
-('CA01000011', '2024-01-01', '10:20', '10:40', 'BS10001'),
-('CA01000012', '2024-01-01', '10:40', '11:00', 'BS10001'),
-('CA01000013', '2024-01-01', '13:00', '13:20', 'BS10001'),
-('CA01000014', '2024-01-01', '13:20', '13:40', 'BS10001'),
-('CA01000015', '2024-01-01', '13:40', '14:00', 'BS10001'),
-('CA01000016', '2024-01-01', '14:00', '14:20', 'BS10001'),
-('CA01000017', '2024-01-01', '14:20', '14:40', 'BS10001'),
-('CA01000018', '2024-01-01', '14:40', '15:00', 'BS10001'),
-('CA01000019', '2024-01-01', '15:00', '15:20', 'BS10001'),
-('CA01000020', '2024-01-01', '15:20', '15:40', 'BS10001'),
-('CA01000021', '2024-01-01', '15:40', '16:00', 'BS10001'),
-('CA01000022', '2024-01-01', '16:00', '16:20', 'BS10001'),
-('CA01000023', '2024-01-01', '16:20', '16:40', 'BS10001'),
-('CA01000024', '2024-01-01', '16:40', '17:00', 'BS10001'),
-('CA01000025', '2024-01-02', '07:00', '07:20', 'BS10001'),
-('CA01000026', '2024-01-02', '07:20', '07:40', 'BS10001'),
-('CA01000027', '2024-01-02', '07:40', '08:00', 'BS10001'),
-('CA01000028', '2024-01-02', '08:00', '08:20', 'BS10001'),
-('CA01000029', '2024-01-02', '08:20', '08:40', 'BS10001'),
-('CA01000030', '2024-01-02', '08:40', '09:00', 'BS10001'),
-('CA01000031', '2024-01-02', '09:00', '09:20', 'BS10001'),
-('CA01000032', '2024-01-02', '09:20', '09:40', 'BS10001'),
-('CA01000033', '2024-01-02', '09:40', '10:00', 'BS10001'),
-('CA01000034', '2024-01-02', '10:00', '10:20', 'BS10001'),
-('CA01000035', '2024-01-02', '10:20', '10:40', 'BS10001'),
-('CA01000036', '2024-01-02', '10:40', '11:00', 'BS10001'),
-('CA01000037', '2024-01-02', '13:00', '13:20', 'BS10001'),
-('CA01000038', '2024-01-02', '13:20', '13:40', 'BS10001'),
-('CA01000039', '2024-01-02', '13:40', '14:00', 'BS10001'),
-('CA01000040', '2024-01-02', '14:00', '14:20', 'BS10001'),
-('CA01000041', '2024-01-02', '14:20', '14:40', 'BS10001'),
-('CA01000042', '2024-01-02', '14:40', '15:00', 'BS10001'),
-('CA01000043', '2024-01-02', '15:00', '15:20', 'BS10001'),
-('CA01000044', '2024-01-02', '15:20', '15:40', 'BS10001'),
-('CA01000045', '2024-01-02', '15:40', '16:00', 'BS10001'),
-('CA01000046', '2024-01-02', '16:00', '16:20', 'BS10001'),
-('CA01000047', '2024-01-02', '16:20', '16:40', 'BS10001'),
-('CA01000048', '2024-01-02', '16:40', '17:00', 'BS10001');
+DROP PROCEDURE InsertLichLamViec_Sang
 
-*/
+DROP PROCEDURE InsertLichLamViec_Chieu
 
 
-SELECT * FROM dbo.lich_lam_viec
-
-
-DECLARE @Ma_so_nhan_vien CHAR(10)
-set @Ma_so_nhan_vien = 'BS10016'
-DECLARE @KETQUA CHAR(10)
-@KETQUA = RIGHT(@Ma_so_nhan_vien,2)
-PRINT @KETQUA
-
-
-
-DELETE dbo.lich_lam_viec
-
-DROP  PROCEDURE InsertLichLamViec 
-
-CREATE PROCEDURE InsertLichLamViec 
+CREATE PROCEDURE InsertLichLamViec_Sang
     @Ma_so_nhan_vien CHAR(7)
 AS
 BEGIN
-    DECLARE @Ngay DATE
-    SET @Ngay = '2024-01-01'
+    SET NOCOUNT ON;
+	DECLARE @StartDate DATE, @EndDate DATE;
+	SET @StartDate = '2024-01-01';
+	SET @EndDate = '2024-05-10';
+    DECLARE @CurrentDate DATE = @StartDate;
+    DECLARE @Counter INT = 1;
+    DECLARE @SoHieuCaSang CHAR(10);
 
-    DECLARE @Counter INT
-    SET @Counter = 1
-
-    DECLARE @So_hieu_ca_lam_viec CHAR(10)
-    DECLARE @Gio_vao TIME
-    DECLARE @Gio_tan_ca TIME
-
-    WHILE @Ngay <= '2024-05-10'
+    WHILE @CurrentDate <= @EndDate
     BEGIN
-        SET @Gio_vao = '07:00'
-        WHILE CAST(@Gio_vao AS DATETIME) < '17:00'
-        BEGIN
-            -- Cập nhật ở đây để đảm bảo mã nhân viên được thêm vào đúng
-            SET @So_hieu_ca_lam_viec = 'CA' + RIGHT(@Ma_so_nhan_vien, 2) + RIGHT('000000' + CAST(@Counter AS VARCHAR(6)), 6)
+        -- Tạo số hiệu ca làm việc cho buổi sáng
+        SET @SoHieuCaSang = CONCAT('CASA', RIGHT(@Ma_so_nhan_vien, 2), FORMAT(@Counter, '0000'));
 
-            SET @Gio_tan_ca = DATEADD(MINUTE, 20, @Gio_vao)
+		-- Insert buổi sáng
+        INSERT INTO lich_lam_viec (So_hieu_ca_lam_viec, Ngay, Gio_vao, Gio_tan_ca, Ma_so_nhan_vien)
+        VALUES (@SoHieuCaSang, @CurrentDate, '07:00', '11:00', @Ma_so_nhan_vien);
 
-            INSERT INTO lich_lam_viec (So_hieu_ca_lam_viec, Ngay, Gio_vao, Gio_tan_ca, Ma_so_nhan_vien)
-            VALUES (@So_hieu_ca_lam_viec, @Ngay, @Gio_vao, @Gio_tan_ca, @Ma_so_nhan_vien)
-
-            SET @Gio_vao = @Gio_tan_ca
-            IF CAST(@Gio_tan_ca AS TIME) >= '11:00' AND CAST(@Gio_tan_ca AS TIME) < '13:00'
-                SET @Gio_vao = '13:00'
-
-            SET @Counter = @Counter + 1
-        END
-        SET @Ngay = DATEADD(DAY, 1, @Ngay)
+        SET @CurrentDate = DATEADD(DAY, 1, @CurrentDate);
+        -- Tăng counter cho số hiệu ca làm việc tiếp theo
+        SET @Counter = @Counter + 1;
     END
 END
 GO
 
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10001'
+CREATE PROCEDURE InsertLichLamViec_Chieu
+    @Ma_so_nhan_vien CHAR(7)
+AS
+BEGIN
+    SET NOCOUNT ON;
+	DECLARE @StartDate DATE, @EndDate DATE;
+	SET @StartDate = '2024-01-01';
+	SET @EndDate = '2024-05-10';
+    DECLARE @CurrentDate DATE = @StartDate;
+    DECLARE @Counter INT = 1;
+    DECLARE @SoHieuCaChieu CHAR(10);
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10002'
+    WHILE @CurrentDate <= @EndDate
+    BEGIN
+        -- Tạo số hiệu ca làm việc cho buổi chiều
+        SET @SoHieuCaChieu = CONCAT('CACH', RIGHT(@Ma_so_nhan_vien, 2), FORMAT(@Counter, '0000'));
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10003'
+        -- Insert buổi chiều
+        INSERT INTO lich_lam_viec (So_hieu_ca_lam_viec, Ngay, Gio_vao, Gio_tan_ca, Ma_so_nhan_vien)
+        VALUES (@SoHieuCaChieu, @CurrentDate, '13:00', '17:00', @Ma_so_nhan_vien);
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10004'
+        SET @CurrentDate = DATEADD(DAY, 1, @CurrentDate);
+        -- Tăng counter cho số hiệu ca làm việc tiếp theo
+        SET @Counter = @Counter + 1;
+    END
+END
+GO
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10005'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10001';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10001';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10006'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10002';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10002';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10007'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10003';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10003';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10008'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10004';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10004';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10009'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10005';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10005';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10010'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10006';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10006';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10011'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10007';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10007';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10012'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10008';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10008';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10013'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10009';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10009';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10014'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10010';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10010';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10015'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10011';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10011';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10016'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10012';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10012';
+
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10013';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10013';
+
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10014';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10014';
+
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10015';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10015';
+
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10016';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10016';
 
 
 
 -- TABLE lich_hen_kham
+DELETE FROM lich_hen_kham
 INSERT INTO lich_hen_kham(Ma_lich_hen_kham, Ngay_dat_lich, Gio_den_kham, Ma_so_lan_di_benh_vien, Ma_benh_nhan, So_hieu_ca_lam_viec)
 VALUES
-('HK10001', '2024-01-01', '09:00:00','LDBV10001', 'BN10001', 'CA01000007'),
-('HK10002', '2024-01-01', '09:20:00','LDBV10002', 'BN10002', 'CA01000008'),
-('HK10003', '2024-01-01', '10:00:00','LDBV10003', 'BN10003', 'CA01000010'),
-('HK10004', '2024-01-01', '13:40:00','LDBV10004', 'BN10004', 'CA01000015'),
-('HK10005', '2024-01-01', '14:00:00','LDBV10005', 'BN10005', 'CA01000016'),
-('HK10006', '2024-01-01', '14:40:00','LDBV10006', 'BN10006', 'CA01000018'),
-('HK10007', '2024-01-01', '15:20:00','LDBV10007', 'BN10007', 'CA01000020'),
-('HK10008', '2024-01-01', '16:00:00','LDBV10008', 'BN10008', 'CA01000022'),
-('HK10009', '2024-01-02', '10:20:00','LDBV10009', 'BN10009', 'CA02000035'),
-('HK10010', '2024-01-02', '14:20:00','LDBV10010', 'BN10010', 'CA02000041'),
-('HK10011', '2024-01-03', '08:40:00','LDBV10011', 'BN10011', 'CA03000054'),
-('HK10012', '2024-01-04', '16:00:00','LDBV10012', 'BN10012', 'CA04000094'),
-('HK10013', '2024-01-05', '09:20:00','LDBV10013', 'BN10013', 'CA05000104'),
-('HK10014', '2024-01-06', '16:20:00','LDBV10014', 'BN10014', 'CA06000143'),
-('HK10015', '2024-01-07', '07:20:00','LDBV10015', 'BN10015', 'CA07000146'),
-('HK10016', '2024-01-08', '10:20:00','LDBV10016', 'BN10016', 'CA08000179'),
-('HK10017', '2024-01-09', '09:20:00','LDBV10017', 'BN10017', 'CA09000200'),
-('HK10018', '2024-01-10', '08:40:00','LDBV10018', 'BN10018', 'CA10000222'),
-('HK10019', '2024-01-11', '16:00:00','LDBV10019', 'BN10019', 'CA11000262'),
-('HK10020', '2024-01-14', '07:20:00','LDBV10020', 'BN10020', 'CA12000314'),
-('HK10021', '2024-01-17', '15:20:00','LDBV10021', 'BN10021', 'CA13000404'),
-('HK10022', '2024-01-20', '14:20:00','LDBV10022', 'BN10022', 'CA14000473'),
-('HK10023', '2024-01-22', '08:40:00','LDBV10023', 'BN10023', 'CA15000510'),     --
-('HK10024', '2024-01-25', '16:00:00','LDBV10024', 'BN10024', 'CA16000598'),     --
-('HK10025', '2024-01-26', '07:20:00','LDBV10025', 'BN10025', 'CA01000602'),
-('HK10026', '2024-01-28', '13:00:00','LDBV10026', 'BN10026', 'CA02000661'),
-('HK10027', '2024-01-31', '14:20:00','LDBV10027', 'BN10027', 'CA03000737'),
-('HK10028', '2024-02-02', '08:40:00','LDBV10028', 'BN10028', 'CA04000747'),
-('HK10029', '2024-02-06', '15:00:00','LDBV10029', 'BN10029', 'CA05000883'),
-('HK10030', '2024-02-09', '09:00:00','LDBV10030', 'BN10030', 'CA06000943'),
-('HK10031', '2024-02-13', '16:40:00','LDBV10031', 'BN10031', 'CA07001056'),
-('HK10032', '2024-02-16', '10:20:00','LDBV10032', 'BN10032', 'CA08001115'),
-('HK10033', '2024-02-19', '14:40:00','LDBV10033', 'BN10033', 'CA09001194'),
-('HK10034', '2024-02-24', '16:20:00','LDBV10034', 'BN10034', 'CA10001319'),
-('HK10035', '2024-02-28', '13:20:00','LDBV10035', 'BN10035', 'CA11001406'),
-('HK10036', '2024-02-29', '09:40:00','LDBV10036', 'BN10036', 'CA12001425'),
-('HK10037', '2024-03-02', '13:40:00', 'LDBV10037', 'BN10037', 'CA13001479'),
-('HK10038', '2024-03-07', '10:20:00', 'LDBV10038', 'BN10038', 'CA14001595'),
-('HK10039', '2024-03-11', '10:20:00', 'LDBV10039', 'BN10039', 'CA15001691'),
-('HK10040', '2024-03-15', '16:00:00', 'LDBV10040', 'BN10040', 'CA16001798'),
-('HK10041', '2024-03-19', '08:40:00', 'LDBV10041', 'BN10041', 'CA01001878'),
-('HK10042', '2024-03-23', '14:20:00', 'LDBV10042', 'BN10042', 'CA02001983'),
-('HK10043', '2024-03-26', '09:40:00', 'LDBV10043', 'BN10043', 'CA03002049'),
-('HK10044', '2024-03-29', '13:40:00', 'LDBV10044', 'BN10044', 'CA04002127'),
-('HK10045', '2024-04-01', '07:40:00', 'LDBV10045', 'BN10045', 'CA05002187'),
-('HK10046', '2024-04-03', '10:20:00', 'LDBV10046', 'BN10046', 'CA06002243'),
-('HK10047', '2024-04-07', '14:40:00', 'LDBV10047', 'BN10047', 'CA07002346'),
-('HK10048', '2024-04-10', '14:20:00', 'LDBV10048', 'BN10048', 'CA08002417'),
-('HK10049', '2024-04-13', '16:00:00', 'LDBV10049', 'BN10049', 'CA09002494'),
-('HK10050', '2024-04-19', '07:40:00', 'LDBV10050', 'BN10050', 'CA10002619'),
-('HK10051', '2024-04-22', '10:20:00', 'LDBV10051', 'BN10051', 'CA11002699'),
-('HK10052', '2024-04-25', '14:40:00', 'LDBV10052', 'BN10052', 'CA12002778'),
-('HK10053', '2024-04-25', '15:20:00', 'LDBV10053', 'BN10053', 'CA13002780'),
-('HK10054', '2024-04-25', '16:00:00', 'LDBV10054', 'BN10054', 'CA14002782'),
-('HK10055', '2024-04-25', '16:40:00', 'LDBV10055', 'BN10055', 'CA15002784'),
-('HK10056', '2024-04-26', '10:20:00', 'LDBV10056', 'BN10056', 'CA16002795'),
-('HK10057', '2024-04-27', '14:40:00', 'LDBV10057', 'BN10057', 'CA01002826'),
-('HK10058', '2024-04-27', '15:20:00', 'LDBV10058', 'BN10058', 'CA02002828'),
-('HK10059', '2024-04-27', '16:00:00', 'LDBV10059', 'BN10059', 'CA03002830'),
-('HK10060', '2024-04-28', '07:40:00', 'LDBV10060', 'BN10060', 'CA04002835');
+('HK10001', '2024-01-01', '09:00:00','LDBV10001', 'BN10001', 'CASA010001'),
+('HK10002', '2024-01-01', '09:20:00','LDBV10002', 'BN10002', 'CASA010001'),
+('HK10003', '2024-01-01', '10:00:00','LDBV10003', 'BN10003', 'CASA010001'),
+('HK10004', '2024-01-01', '13:40:00','LDBV10004', 'BN10004', 'CACH010001'),
+('HK10005', '2024-01-01', '14:00:00','LDBV10005', 'BN10005', 'CACH010001'),
+('HK10006', '2024-01-01', '14:40:00','LDBV10006', 'BN10006', 'CACH010001'),
+('HK10007', '2024-01-01', '15:20:00','LDBV10007', 'BN10007', 'CACH010001'),
+('HK10008', '2024-01-01', '16:00:00','LDBV10008', 'BN10008', 'CACH010001'),
+('HK10009', '2024-01-02', '10:20:00','LDBV10009', 'BN10009', 'CASA020002'),
+('HK10010', '2024-01-02', '14:20:00','LDBV10010', 'BN10010', 'CACH020002'),
+('HK10011', '2024-01-03', '08:40:00','LDBV10011', 'BN10011', 'CASA030003'),
+('HK10012', '2024-01-04', '16:00:00','LDBV10012', 'BN10012', 'CACH040004'),
+('HK10013', '2024-01-05', '09:20:00','LDBV10013', 'BN10013', 'CASA040005'),
+('HK10014', '2024-01-06', '16:20:00','LDBV10014', 'BN10014', 'CACH060006'),
+('HK10015', '2024-01-07', '07:20:00','LDBV10015', 'BN10015', 'CASA070007'),
+('HK10016', '2024-01-08', '10:20:00','LDBV10016', 'BN10016', 'CASA080008'),
+('HK10017', '2024-01-09', '09:20:00','LDBV10017', 'BN10017', 'CASA090009'),
+('HK10018', '2024-01-10', '08:40:00','LDBV10018', 'BN10018', 'CASA100010'),
+('HK10019', '2024-01-11', '16:00:00','LDBV10019', 'BN10019', 'CACH110011'),
+('HK10020', '2024-01-14', '07:20:00','LDBV10020', 'BN10020', 'CASA120014'),
+('HK10021', '2024-01-17', '15:20:00','LDBV10021', 'BN10021', 'CACH130017'),
+('HK10022', '2024-01-20', '14:20:00','LDBV10022', 'BN10022', 'CACH140020'),
+('HK10023', '2024-01-22', '08:40:00','LDBV10023', 'BN10023', 'CASA150022'),     --
+('HK10024', '2024-01-25', '16:00:00','LDBV10024', 'BN10024', 'CACH160025'),     --
+('HK10025', '2024-01-26', '07:20:00','LDBV10025', 'BN10025', 'CASA010026'),
+('HK10026', '2024-01-28', '13:00:00','LDBV10026', 'BN10026', 'CACH020028'),
+('HK10027', '2024-01-31', '14:20:00','LDBV10027', 'BN10027', 'CACH030031'),
+('HK10028', '2024-02-02', '08:40:00','LDBV10028', 'BN10028', 'CASA040033'),
+('HK10029', '2024-02-06', '15:00:00','LDBV10029', 'BN10029', 'CACH050037'),
+('HK10030', '2024-02-09', '09:00:00','LDBV10030', 'BN10030', 'CASA060040'),
+('HK10031', '2024-02-13', '16:40:00','LDBV10031', 'BN10031', 'CACH070044'),
+('HK10032', '2024-02-16', '10:20:00','LDBV10032', 'BN10032', 'CASA080047'),
+('HK10033', '2024-02-19', '14:40:00','LDBV10033', 'BN10033', 'CACH090050'),
+('HK10034', '2024-02-24', '16:20:00','LDBV10034', 'BN10034', 'CACH100055'),
+('HK10035', '2024-02-28', '13:20:00','LDBV10035', 'BN10035', 'CACH110059'),
+('HK10036', '2024-02-29', '09:40:00','LDBV10036', 'BN10036', 'CASA120060'),
+('HK10037', '2024-03-02', '13:40:00', 'LDBV10037', 'BN10037', 'CACH130062'),
+('HK10038', '2024-03-07', '10:20:00', 'LDBV10038', 'BN10038', 'CASA140067'),
+('HK10039', '2024-03-11', '10:20:00', 'LDBV10039', 'BN10039', 'CASA150071'),
+('HK10040', '2024-03-15', '16:00:00', 'LDBV10040', 'BN10040', 'CACH160075'),
+('HK10041', '2024-03-19', '08:40:00', 'LDBV10041', 'BN10041', 'CASA010079'),
+('HK10042', '2024-03-23', '14:20:00', 'LDBV10042', 'BN10042', 'CACH020083'),
+('HK10043', '2024-03-26', '09:40:00', 'LDBV10043', 'BN10043', 'CASA030086'),
+('HK10044', '2024-03-29', '13:40:00', 'LDBV10044', 'BN10044', 'CACH040089'),
+('HK10045', '2024-04-01', '07:40:00', 'LDBV10045', 'BN10045', 'CASA050092'),
+('HK10046', '2024-04-03', '10:20:00', 'LDBV10046', 'BN10046', 'CASA060094'),
+('HK10047', '2024-04-07', '14:40:00', 'LDBV10047', 'BN10047', 'CACH070098'),
+('HK10048', '2024-04-10', '14:20:00', 'LDBV10048', 'BN10048', 'CACH080101'),
+('HK10049', '2024-04-13', '16:00:00', 'LDBV10049', 'BN10049', 'CACH090104'),
+('HK10050', '2024-04-19', '07:40:00', 'LDBV10050', 'BN10050', 'CASA100110'),
+('HK10051', '2024-04-22', '10:20:00', 'LDBV10051', 'BN10051', 'CASA110113'),
+('HK10052', '2024-04-25', '14:40:00', 'LDBV10052', 'BN10052', 'CACH120116'),
+('HK10053', '2024-04-25', '15:20:00', 'LDBV10053', 'BN10053', 'CACH130116'),
+('HK10054', '2024-04-25', '16:00:00', 'LDBV10054', 'BN10054', 'CACH140116'),
+('HK10055', '2024-04-25', '16:40:00', 'LDBV10055', 'BN10055', 'CACH150116'),
+('HK10056', '2024-04-26', '10:20:00', 'LDBV10056', 'BN10056', 'CASA160117'),
+('HK10057', '2024-04-27', '14:40:00', 'LDBV10057', 'BN10057', 'CACH010118'),
+('HK10058', '2024-04-27', '15:20:00', 'LDBV10058', 'BN10058', 'CACH020118'),
+('HK10059', '2024-04-27', '16:00:00', 'LDBV10059', 'BN10059', 'CACH030118'),
+('HK10060', '2024-04-28', '07:40:00', 'LDBV10060', 'BN10060', 'CACH040119');
 ...
 
 
