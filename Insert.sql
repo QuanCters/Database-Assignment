@@ -1159,146 +1159,115 @@ SELECT * FROM lich_lam_viec
 
 DELETE lich_lam_viec
 
-/*
-INSERT INTO lich_lam_viec (So_hieu_ca_lam_viec, Ngay, Gio_vao, Gio_tan_ca, Ma_so_nhan_vien)
-VALUES 
-('CA01000001', '2024-01-01', '07:00', '07:20', 'BS10001'),
-('CA01000002', '2024-01-01', '07:20', '07:40', 'BS10001'),
-('CA01000003', '2024-01-01', '07:40', '08:00', 'BS10001'),
-('CA01000004', '2024-01-01', '08:00', '08:20', 'BS10001'),
-('CA01000005', '2024-01-01', '08:20', '08:40', 'BS10001'),
-('CA01000006', '2024-01-01', '08:40', '09:00', 'BS10001'),
-('CA01000007', '2024-01-01', '09:00', '09:20', 'BS10001'),
-('CA01000008', '2024-01-01', '09:20', '09:40', 'BS10001'),
-('CA01000009', '2024-01-01', '09:40', '10:00', 'BS10001'),
-('CA01000010', '2024-01-01', '10:00', '10:20', 'BS10001'),
-('CA01000011', '2024-01-01', '10:20', '10:40', 'BS10001'),
-('CA01000012', '2024-01-01', '10:40', '11:00', 'BS10001'),
-('CA01000013', '2024-01-01', '13:00', '13:20', 'BS10001'),
-('CA01000014', '2024-01-01', '13:20', '13:40', 'BS10001'),
-('CA01000015', '2024-01-01', '13:40', '14:00', 'BS10001'),
-('CA01000016', '2024-01-01', '14:00', '14:20', 'BS10001'),
-('CA01000017', '2024-01-01', '14:20', '14:40', 'BS10001'),
-('CA01000018', '2024-01-01', '14:40', '15:00', 'BS10001'),
-('CA01000019', '2024-01-01', '15:00', '15:20', 'BS10001'),
-('CA01000020', '2024-01-01', '15:20', '15:40', 'BS10001'),
-('CA01000021', '2024-01-01', '15:40', '16:00', 'BS10001'),
-('CA01000022', '2024-01-01', '16:00', '16:20', 'BS10001'),
-('CA01000023', '2024-01-01', '16:20', '16:40', 'BS10001'),
-('CA01000024', '2024-01-01', '16:40', '17:00', 'BS10001'),
-('CA01000025', '2024-01-02', '07:00', '07:20', 'BS10001'),
-('CA01000026', '2024-01-02', '07:20', '07:40', 'BS10001'),
-('CA01000027', '2024-01-02', '07:40', '08:00', 'BS10001'),
-('CA01000028', '2024-01-02', '08:00', '08:20', 'BS10001'),
-('CA01000029', '2024-01-02', '08:20', '08:40', 'BS10001'),
-('CA01000030', '2024-01-02', '08:40', '09:00', 'BS10001'),
-('CA01000031', '2024-01-02', '09:00', '09:20', 'BS10001'),
-('CA01000032', '2024-01-02', '09:20', '09:40', 'BS10001'),
-('CA01000033', '2024-01-02', '09:40', '10:00', 'BS10001'),
-('CA01000034', '2024-01-02', '10:00', '10:20', 'BS10001'),
-('CA01000035', '2024-01-02', '10:20', '10:40', 'BS10001'),
-('CA01000036', '2024-01-02', '10:40', '11:00', 'BS10001'),
-('CA01000037', '2024-01-02', '13:00', '13:20', 'BS10001'),
-('CA01000038', '2024-01-02', '13:20', '13:40', 'BS10001'),
-('CA01000039', '2024-01-02', '13:40', '14:00', 'BS10001'),
-('CA01000040', '2024-01-02', '14:00', '14:20', 'BS10001'),
-('CA01000041', '2024-01-02', '14:20', '14:40', 'BS10001'),
-('CA01000042', '2024-01-02', '14:40', '15:00', 'BS10001'),
-('CA01000043', '2024-01-02', '15:00', '15:20', 'BS10001'),
-('CA01000044', '2024-01-02', '15:20', '15:40', 'BS10001'),
-('CA01000045', '2024-01-02', '15:40', '16:00', 'BS10001'),
-('CA01000046', '2024-01-02', '16:00', '16:20', 'BS10001'),
-('CA01000047', '2024-01-02', '16:20', '16:40', 'BS10001'),
-('CA01000048', '2024-01-02', '16:40', '17:00', 'BS10001');
+DROP PROCEDURE InsertLichLamViec_Sang
 
-*/
+DROP PROCEDURE InsertLichLamViec_Chieu
 
 
-SELECT * FROM dbo.lich_lam_viec
-
-
-DECLARE @Ma_so_nhan_vien CHAR(10)
-set @Ma_so_nhan_vien = 'BS10016'
-DECLARE @KETQUA CHAR(10)
-@KETQUA = RIGHT(@Ma_so_nhan_vien,2)
-PRINT @KETQUA
-
-
-
-DELETE dbo.lich_lam_viec
-
-DROP  PROCEDURE InsertLichLamViec 
-
-CREATE PROCEDURE InsertLichLamViec 
+CREATE PROCEDURE InsertLichLamViec_Sang
     @Ma_so_nhan_vien CHAR(7)
 AS
 BEGIN
-    DECLARE @Ngay DATE
-    SET @Ngay = '2024-01-01'
+    SET NOCOUNT ON;
+	DECLARE @StartDate DATE, @EndDate DATE;
+	SET @StartDate = '2024-01-01';
+	SET @EndDate = '2024-05-10';
+    DECLARE @CurrentDate DATE = @StartDate;
+    DECLARE @Counter INT = 1;
+    DECLARE @SoHieuCaSang CHAR(10);
 
-    DECLARE @Counter INT
-    SET @Counter = 1
-
-    DECLARE @So_hieu_ca_lam_viec CHAR(10)
-    DECLARE @Gio_vao TIME
-    DECLARE @Gio_tan_ca TIME
-
-    WHILE @Ngay <= '2024-05-10'
+    WHILE @CurrentDate <= @EndDate
     BEGIN
-        SET @Gio_vao = '07:00'
-        WHILE CAST(@Gio_vao AS DATETIME) < '17:00'
-        BEGIN
-            -- Cập nhật ở đây để đảm bảo mã nhân viên được thêm vào đúng
-            SET @So_hieu_ca_lam_viec = 'CA' + RIGHT(@Ma_so_nhan_vien, 2) + RIGHT('000000' + CAST(@Counter AS VARCHAR(6)), 6)
+        -- Tạo số hiệu ca làm việc cho buổi sáng
+        SET @SoHieuCaSang = CONCAT('CASA', RIGHT(@Ma_so_nhan_vien, 2), FORMAT(@Counter, '0000'));
 
-            SET @Gio_tan_ca = DATEADD(MINUTE, 20, @Gio_vao)
+		-- Insert buổi sáng
+        INSERT INTO lich_lam_viec (So_hieu_ca_lam_viec, Ngay, Gio_vao, Gio_tan_ca, Ma_so_nhan_vien)
+        VALUES (@SoHieuCaSang, @CurrentDate, '07:00', '11:00', @Ma_so_nhan_vien);
 
-            INSERT INTO lich_lam_viec (So_hieu_ca_lam_viec, Ngay, Gio_vao, Gio_tan_ca, Ma_so_nhan_vien)
-            VALUES (@So_hieu_ca_lam_viec, @Ngay, @Gio_vao, @Gio_tan_ca, @Ma_so_nhan_vien)
-
-            SET @Gio_vao = @Gio_tan_ca
-            IF CAST(@Gio_tan_ca AS TIME) >= '11:00' AND CAST(@Gio_tan_ca AS TIME) < '13:00'
-                SET @Gio_vao = '13:00'
-
-            SET @Counter = @Counter + 1
-        END
-        SET @Ngay = DATEADD(DAY, 1, @Ngay)
+        SET @CurrentDate = DATEADD(DAY, 1, @CurrentDate);
+        -- Tăng counter cho số hiệu ca làm việc tiếp theo
+        SET @Counter = @Counter + 1;
     END
 END
 GO
 
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10001'
+CREATE PROCEDURE InsertLichLamViec_Chieu
+    @Ma_so_nhan_vien CHAR(7)
+AS
+BEGIN
+    SET NOCOUNT ON;
+	DECLARE @StartDate DATE, @EndDate DATE;
+	SET @StartDate = '2024-01-01';
+	SET @EndDate = '2024-05-10';
+    DECLARE @CurrentDate DATE = @StartDate;
+    DECLARE @Counter INT = 1;
+    DECLARE @SoHieuCaChieu CHAR(10);
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10002'
+    WHILE @CurrentDate <= @EndDate
+    BEGIN
+        -- Tạo số hiệu ca làm việc cho buổi chiều
+        SET @SoHieuCaChieu = CONCAT('CACH', RIGHT(@Ma_so_nhan_vien, 2), FORMAT(@Counter, '0000'));
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10003'
+        -- Insert buổi chiều
+        INSERT INTO lich_lam_viec (So_hieu_ca_lam_viec, Ngay, Gio_vao, Gio_tan_ca, Ma_so_nhan_vien)
+        VALUES (@SoHieuCaChieu, @CurrentDate, '13:00', '17:00', @Ma_so_nhan_vien);
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10004'
+        SET @CurrentDate = DATEADD(DAY, 1, @CurrentDate);
+        -- Tăng counter cho số hiệu ca làm việc tiếp theo
+        SET @Counter = @Counter + 1;
+    END
+END
+GO
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10005'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10001';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10001';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10006'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10002';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10002';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10007'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10003';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10003';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10008'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10004';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10004';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10009'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10005';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10005';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10010'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10006';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10006';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10011'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10007';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10007';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10012'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10008';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10008';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10013'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10009';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10009';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10014'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10010';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10010';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10015'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10011';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10011';
 
-EXEC InsertLichLamViec @Ma_so_nhan_vien = 'BS10016'
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10012';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10012';
+
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10013';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10013';
+
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10014';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10014';
+
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10015';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10015';
+
+EXEC InsertLichLamViec_Sang @Ma_so_nhan_vien = 'BS10016';
+EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10016';
 
 
 
