@@ -10,7 +10,6 @@ BEGIN
         bs.Ma_so_nhan_vien AS DoctorID,
         nv.Ho AS LastName,
         nv.Ten AS FirstName,
-        bs.Bang_cap AS BangCap,
         bs.Chuc_vu AS ChucVu,
         COUNT(DISTINCT CASE WHEN MONTH(lhk.Ngay_dat_lich) = @AppointmentMonth THEN lhk.Ma_lich_hen_kham END) AS AppointmentCount,
         COUNT(DISTINCT CASE WHEN MONTH(ldbv.Ngay) = @AppointmentMonth THEN lsddv.Ma_so END) AS ServiceCount,
@@ -27,11 +26,11 @@ BEGIN
     LEFT JOIN
         lan_su_dung_dich_vu lsddv ON bs.Ma_so_nhan_vien = lsddv.Ma_so_nhan_vien
     LEFT JOIN
-        lan_di_benh_vien ldbv ON lsddv.Ma_so_lan_di_benh_vien = ldbv.Ma_so
+        lan_di_benh_vien ldbv ON lsddv.Ma_so_lan_di_benh_vien = ldbv.Ma_so_lan_di_benh_vien
     WHERE
         MONTH(lhk.Ngay_dat_lich) = @AppointmentMonth OR MONTH(ldbv.Ngay) = @AppointmentMonth OR (lhk.Ma_lich_hen_kham IS NULL AND lsddv.Ma_so IS NULL)
     GROUP BY
-        bs.Ma_so_nhan_vien, nv.Ho, nv.Ten, bs.Chuc_vu, bs.Bang_cap
+        bs.Ma_so_nhan_vien, nv.Ho, nv.Ten, bs.Chuc_vu
     HAVING
         COUNT(DISTINCT CASE WHEN MONTH(lhk.Ngay_dat_lich) = @AppointmentMonth THEN lhk.Ma_lich_hen_kham END) +
         COUNT(DISTINCT CASE WHEN MONTH(ldbv.Ngay) = @AppointmentMonth THEN lsddv.Ma_so END) > 0
@@ -40,4 +39,4 @@ BEGIN
 END;
 GO
 
-EXECUTE Proc_GetDoctorAppointmentsAndServices @AppointmentMonth =05;
+EXECUTE Proc_GetDoctorAppointmentsAndServices @AppointmentMonth =01;
