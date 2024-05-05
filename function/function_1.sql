@@ -59,11 +59,11 @@ BEGIN
 				FROM lan_su_dung_dich_vu 
 				WHERE Ma_loai_dich_vu = @Ma_loai_dich_vu;
 
-				SELECT @Ho = Ho
+				SELECT @Ho = RTRIM(Ho)
 				FROM nhan_vien
 				WHERE Ma_so_nhan_vien = @Ma_bac_si;
 
-				SELECT @Ten = Ten
+				SELECT @Ten = RTRIM(Ten)
 				FROM nhan_vien
 				WHERE Ma_so_nhan_vien = @Ma_bac_si;
 
