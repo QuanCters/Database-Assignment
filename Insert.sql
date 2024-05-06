@@ -1341,5 +1341,73 @@ VALUES
 
 
 
+	
+
+-- Update SDT Cho Data trước đó
+UPDATE benh_nhan
+SET SDT = CASE
+    WHEN Ma_benh_nhan = 'BN10001' THEN '0243123457'
+    WHEN Ma_benh_nhan = 'BN10002' THEN '0225234567'
+    WHEN Ma_benh_nhan = 'BN10003' THEN '0203345689'
+    WHEN Ma_benh_nhan = 'BN10004' THEN '0220484890'
+    WHEN Ma_benh_nhan = 'BN10005' THEN '0222549501'
+    WHEN Ma_benh_nhan = 'BN10006' THEN '0236183012'
+    WHEN Ma_benh_nhan = 'BN10007' THEN '0235766723'
+    WHEN Ma_benh_nhan = 'BN10008' THEN '0255193624'
+    WHEN Ma_benh_nhan = 'BN10009' THEN '0256907745'
+    WHEN Ma_benh_nhan = 'BN10010' THEN '0234065896'
+    WHEN Ma_benh_nhan = 'BN10011' THEN '0283938767'
+    WHEN Ma_benh_nhan = 'BN10012' THEN '0274850678'
+    WHEN Ma_benh_nhan = 'BN10013' THEN '0251349889'
+    WHEN Ma_benh_nhan = 'BN10014' THEN '0272454890'
+    WHEN Ma_benh_nhan = 'BN10015' THEN '0273567241'
+    WHEN Ma_benh_nhan = 'BN10016' THEN '0292647012'
+    WHEN Ma_benh_nhan = 'BN10017' THEN '0296324123'
+    WHEN Ma_benh_nhan = 'BN10018' THEN '0297105834'
+    WHEN Ma_benh_nhan = 'BN10019' THEN '029097645'
+    WHEN Ma_benh_nhan = 'BN10020' THEN '0277015876'
+    WHEN Ma_benh_nhan = 'BN10021' THEN '0291007567'
+    WHEN Ma_benh_nhan = 'BN10022' THEN '0299238578'
+    WHEN Ma_benh_nhan = 'BN10023' THEN '0270378659'
+    WHEN Ma_benh_nhan = 'BN10024' THEN '0293478590'
+    WHEN Ma_benh_nhan = 'BN10025' THEN '0294616501'
+    WHEN Ma_benh_nhan = 'BN10026' THEN '0275690712'
+    WHEN Ma_benh_nhan = 'BN10027' THEN '0257294123'
+    WHEN Ma_benh_nhan = 'BN10028' THEN '0259868734'
+    WHEN Ma_benh_nhan = 'BN10029' THEN '0252980345'
+    WHEN Ma_benh_nhan = 'BN10030' THEN '026301235'
+    WHEN Ma_benh_nhan = 'BN10031' THEN '0262129456'
+    WHEN Ma_benh_nhan = 'BN10032' THEN '0261259767'
+    WHEN Ma_benh_nhan = 'BN10033' THEN '0258347598'
+    WHEN Ma_benh_nhan = 'BN10034' THEN '0260456219'
+    WHEN Ma_benh_nhan = 'BN10035' THEN '0269448890'
+    WHEN Ma_benh_nhan = 'BN10036' THEN '0253578301'
+    WHEN Ma_benh_nhan = 'BN10037' THEN '0208336012'
+    WHEN Ma_benh_nhan = 'BN10038' THEN '0210832863'
+    WHEN Ma_benh_nhan = 'BN10039' THEN '0211904274'
+    WHEN Ma_benh_nhan = 'BN10040' THEN '0208055745'
+    WHEN Ma_benh_nhan = 'BN10041' THEN '0216180556'
+    WHEN Ma_benh_nhan = 'BN10042' THEN '0219271967'
+    WHEN Ma_benh_nhan = 'BN10043' THEN '0214495768'
+    WHEN Ma_benh_nhan = 'BN10044' THEN '0215112789'
+    WHEN Ma_benh_nhan = 'BN10045' THEN '0212566843'
+    WHEN Ma_benh_nhan = 'BN10046' THEN '0206615301'
+    WHEN Ma_benh_nhan = 'BN10047' THEN '0213463212'
+    WHEN Ma_benh_nhan = 'BN10048' THEN '0208436723'
+    WHEN Ma_benh_nhan = 'BN10049' THEN '0209933594'
+    WHEN Ma_benh_nhan = 'BN10050' THEN '0226047245'
+    WHEN Ma_benh_nhan = 'BN10051' THEN '0228147656'
+    WHEN Ma_benh_nhan = 'BN10052' THEN '0229069567'
+    WHEN Ma_benh_nhan = 'BN10053' THEN '0237412708'
+    WHEN Ma_benh_nhan = 'BN10054' THEN '0239456489'
+    WHEN Ma_benh_nhan = 'BN10055' THEN '0234567890'
+    WHEN Ma_benh_nhan = 'BN10056' THEN '0233654601'
+    WHEN Ma_benh_nhan = 'BN10057' THEN '0212559012'
+    WHEN Ma_benh_nhan = 'BN10058' THEN '0218820623'
+    WHEN Ma_benh_nhan = 'BN10059' THEN '0204930934'
+    WHEN Ma_benh_nhan = 'BN10060' THEN '0257022345'
+END;
+```
+
 
 
