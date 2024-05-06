@@ -83,7 +83,7 @@ VALUES
 
 
 -- Bảng benh_nhan
-INSERT INTO benh_nhan (Ma_benh_nhan, CCCD, Ho, Ten, Dia_chi, Email, Gioi_tinh, Ngay_sinh)
+INSERT INTO benh_nhan (Ma_benh_nhan, CCCD, Ho, Ten, Dia_chi, Email, Gioi_tinh, Ngay_sinh, SĐT)
 VALUES 
 ('BN10001', '123456789012', N'Nguyễn', N'Thị Hồng Thơ', N'Tiền Giang', 'nguyenthitho@example.com', N'Nữ', '1982-03-25','0243123457'),
 ('BN10002', '234567890123', N'Võ', N'Thị Ngọc Yến', N'Bình Phước', 'vothiyen@example.com', N'Nữ', '1975-10-15', '0225234567'),
