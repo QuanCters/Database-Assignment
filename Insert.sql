@@ -129,8 +129,8 @@ VALUES
 ('BN10042', '323334353637', N'Lê', N'Văn Hải', N'Nam Định', 'levanhai@example.com', N'Nam', '1976-02-28', '0219271967'),
 ('BN10043', '333435363738', N'Nguyễn', N'Thị Bình', N'Phú Thọ', 'nguyenthibinh@example.com', N'Nữ', '1988-09-03', '0214495768'),
 ('BN10044', '343536373839', N'Trần', N'Văn Hoàng', N'Bạc Liêu', 'tranvanhoang@example.com', N'Nam', '1980-12-10', '0215112789'),
-('BN10045', '353637383940', N'Hoàng', N'Thị Hồng', N'Gia Lai', 'hoangthihong@example.com', N'Nữ', '1995-04-25', ' 0212566843'),
-('BN10046', '363738394041', N'Võ', N'Thành Long', N'Đắk Nông', 'vothanhlong@example.com', N'Nam', '1987-11-18', ' 0206615301'),
+('BN10045', '353637383940', N'Hoàng', N'Thị Hồng', N'Gia Lai', 'hoangthihong@example.com', N'Nữ', '1995-04-25', '0212566843'),
+('BN10046', '363738394041', N'Võ', N'Thành Long', N'Đắk Nông', 'vothanhlong@example.com', N'Nam', '1987-11-18', '0206615301'),
 ('BN10047', '373839404142', N'Đinh', N'Thị Thu', N'Sóc Trăng', 'dinhthithu@example.com', N'Nữ', '1979-08-05', '0213463212'),
 ('BN10048', '383940414243', N'Lê', N'Văn Hùng', N'Phú Yên', 'levanhung2@example.com', N'Nam', '1982-03-20', '0208436723'),
 ('BN10049', '394041424344', N'Nguyễn', N'Thị Hạnh', N'Bình Thuận', 'nguyenthihanh@example.com', N'Nữ', '1990-06-15', '0209933594'),
@@ -145,6 +145,7 @@ VALUES
 ('BN10058', '484950515253', N'Phạm', N'Thị Thùy', N'Lào Cai', 'phamthithuy2@example.com', N'Nữ', '1985-09-25', '0218820623'),
 ('BN10059', '495051525354', N'Lê', N'Thị Hương', N'Thanh Hóa', 'lethihuong3@example.com', N'Nữ', '1991-02-28', '0204930934'),
 ('BN10060', '505152535455', N'Nguyễn', N'Văn An', N'Hà Tĩnh', 'nguyenvanan@example.com', N'Nam', '1980-11-05', '0257022345');
+
 
 
 
