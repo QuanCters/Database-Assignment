@@ -46,7 +46,6 @@ VALUES
 ('BS10015', N'Bác sĩ chuyên khoa', N'Tai - Mũi - Họng',N'Bác sĩ hạng 1', NULL),
 ('BS10016', N'Bác sĩ chuyên khoa', N'Tai - Mũi - Họng',N'Bác sĩ hạng 1', 'BS10015');
 
-SELECT * FROM bac_si
 
 -- Table bang_cap_bac_si
 INSERT INTO bang_cap_bac_si (Ma_so_nhan_vien, Bang_cap)
@@ -145,7 +144,6 @@ VALUES
 ('BN10058', '484950515253', N'Phạm', N'Thị Thùy', N'Lào Cai', 'phamthithuy2@example.com', N'Nữ', '1985-09-25', '0218820623'),
 ('BN10059', '495051525354', N'Lê', N'Thị Hương', N'Thanh Hóa', 'lethihuong3@example.com', N'Nữ', '1991-02-28', '0204930934'),
 ('BN10060', '505152535455', N'Nguyễn', N'Văn An', N'Hà Tĩnh', 'nguyenvanan@example.com', N'Nam', '1980-11-05', '0257022345');
-
 
 
 
@@ -279,7 +277,7 @@ VALUES
 ('BN10059', '2024-04-27', '16:00:00', 77.5, 180, '140/90', 23.9, N'Thừa cân'),
 ('BN10060', '2024-04-28', '07:40:00', 72, 175, '125/80', 23.5, N'Bình thường');
 
-DELETE thong_tin_theo_doi_suc_khoe
+
 
 --Table than_nhan
 INSERT INTO than_nhan (Ma_benh_nhan, Ten, Dia_chi)
@@ -416,73 +414,71 @@ VALUES
 
 
 --TABLE lan_di_benh_vien
-
 INSERT INTO lan_di_benh_vien (Ma_so_lan_di_benh_vien, Gio, Ngay, Tong_chi_phi, Ma_benh_nhan)
 VALUES 
-('LDBV10001', '09:20', '2024-01-01', 0, 'BN10001'),
-('LDBV10002', '09:40', '2024-01-01', 0, 'BN10002'),
-('LDBV10003', '10:00', '2024-01-01', 0, 'BN10003'),
-('LDBV10004', '13:40', '2024-01-01', 0, 'BN10004'),
-('LDBV10005', '14:00', '2024-01-01', 0, 'BN10005'),
-('LDBV10006', '14:40', '2024-01-01', 0, 'BN10006'),
-('LDBV10007', '15:20', '2024-01-01', 0, 'BN10007'),
-('LDBV10008', '16:00', '2024-01-01', 0, 'BN10008'),
-('LDBV10009', '10:20', '2024-01-02', 0, 'BN10009'),
-('LDBV10010', '14:30', '2024-01-02', 0, 'BN10010'),
-('LDBV10011', '08:40', '2024-01-03', 0, 'BN10011'),
-('LDBV10012', '16:00', '2024-01-04', 0, 'BN10012'),
-('LDBV10013', '09:20', '2024-01-05', 0, 'BN10013'),
-('LDBV10014', '16:20', '2024-01-06', 0, 'BN10014'),
-('LDBV10015', '07:30', '2023-01-07', 0, 'BN10015'),
-('LDBV10016', '10:20', '2024-01-08', 0, 'BN10016'),
-('LDBV10017', '09:20', '2024-01-09', 0, 'BN10017'),
-('LDBV10018', '08:40', '2024-01-10', 0, 'BN10018'),
-('LDBV10019', '16:00', '2024-01-11', 0, 'BN10019'),
-('LDBV10020', '07:20', '2024-01-14', 0, 'BN10020'),
-('LDBV10021', '15:20', '2024-01-17', 0, 'BN10021'),
-('LDBV10022', '14:20', '2024-01-20', 0, 'BN10022'),
-('LDBV10023', '08:40', '2024-01-22', 0, 'BN10023'),
-('LDBV10024', '16:00', '2024-01-25', 0, 'BN10024'),
-('LDBV10025', '07:20', '2024-01-26', 0, 'BN10025'),
-('LDBV10026', '13:00', '2024-01-28', 0, 'BN10026'),
-('LDBV10027', '14:20', '2024-01-31', 0, 'BN10027'),
-('LDBV10028', '08:40', '2024-02-02', 0, 'BN10028'),
-('LDBV10029', '15:00', '2024-02-06', 0, 'BN10029'),
-('LDBV10030', '09:00', '2024-02-09', 0, 'BN10030'),
-('LDBV10031', '16:40', '2024-02-13', 0, 'BN10031'),
-('LDBV10032', '10:20', '2024-02-16', 0, 'BN10032'),
-('LDBV10033', '14:40', '2024-02-19', 0, 'BN10033'),
-('LDBV10034', '16:20', '2024-02-24', 0, 'BN10034'),
-('LDBV10035', '13:20', '2024-02-28', 0, 'BN10035'),
-('LDBV10036', '09:40', '2024-02-29', 0, 'BN10036'),
-('LDBV10037', '13:40', '2024-03-02', 0, 'BN10037'),
-('LDBV10038', '10:20', '2024-03-07', 0, 'BN10038'),
-('LDBV10039', '10:20', '2024-03-11', 0, 'BN10039'),
-('LDBV10040', '16:00', '2024-03-15', 0, 'BN10040'),
-('LDBV10041', '08:40', '2024-03-19', 0, 'BN10041'),
-('LDBV10042', '14:20', '2024-03-23', 0, 'BN10042'),
-('LDBV10043', '09:40', '2024-03-26', 0, 'BN10043'),
-('LDBV10044', '13:40', '2024-03-29', 0, 'BN10044'),
-('LDBV10045', '07:40', '2024-04-01', 0, 'BN10045'),
-('LDBV10046', '10:20', '2024-04-03', 0, 'BN10046'),
-('LDBV10047', '14:40', '2024-04-07', 0, 'BN10047'),
-('LDBV10048', '14:20', '2024-04-10', 0, 'BN10048'),
-('LDBV10049', '16:00', '2024-04-13', 0, 'BN10049'),
-('LDBV10050', '07:40', '2024-04-19', 0, 'BN10050'),
-('LDBV10051', '10:20', '2024-04-22', 0, 'BN10051'),
-('LDBV10052', '14:40', '2024-04-25', 0, 'BN10052'),
-('LDBV10053', '15:20', '2024-04-25', 0, 'BN10053'),
-('LDBV10054', '16:00', '2024-04-25', 0, 'BN10054'),
-('LDBV10055', '16:40', '2024-04-25', 0, 'BN10055'),
-('LDBV10056', '10:20', '2024-04-26', 0, 'BN10056'),
-('LDBV10057', '14:40', '2024-04-27', 0, 'BN10057'),
-('LDBV10058', '15:20', '2024-04-27', 0, 'BN10058'),
-('LDBV10059', '16:00', '2024-04-27', 0, 'BN10059'),
-('LDBV10060', '07:40', '2024-04-28', 0, 'BN10060');
+('LDBV10001', '09:20', '2024-01-01', 4450000, 'BN10001'),
+('LDBV10002', '09:40', '2024-01-01', 5200000, 'BN10002'),
+('LDBV10003', '10:00', '2024-01-01', 4875000, 'BN10003'),
+('LDBV10004', '13:40', '2024-01-01', 6100000, 'BN10004'),
+('LDBV10005', '14:00', '2024-01-01', 7850000, 'BN10005'),
+('LDBV10006', '14:40', '2024-01-01', 2420000, 'BN10006'),
+('LDBV10007', '15:20', '2024-01-01', 1850000, 'BN10007'),
+('LDBV10008', '16:00', '2024-01-01', 1215000, 'BN10008'),
+('LDBV10009', '10:20', '2024-01-02', 2195000, 'BN10009'),
+('LDBV10010', '14:30', '2024-01-02', 4980000, 'BN10010'),
+('LDBV10011', '08:40', '2024-01-03', 9110000, 'BN10011'),
+('LDBV10012', '16:00', '2024-01-04', 3655000, 'BN10012'),
+('LDBV10013', '09:20', '2024-01-05', 2460000, 'BN10013'),
+('LDBV10014', '16:20', '2024-01-06', 2220000, 'BN10014'),
+('LDBV10015', '07:30', '2023-01-07', 2675000, 'BN10015'),
+('LDBV10016', '10:20', '2024-01-08', 1230000, 'BN10016'),
+('LDBV10017', '09:20', '2024-01-09', 3500000, 'BN10017'),
+('LDBV10018', '08:40', '2024-01-10', 1565000, 'BN10018'),
+('LDBV10019', '16:00', '2024-01-11', 1900000, 'BN10019'),
+('LDBV10020', '07:20', '2024-01-14', 2300000, 'BN10020'),
+('LDBV10021', '15:20', '2024-01-17', 2450000, 'BN10021'),
+('LDBV10022', '14:20', '2024-01-20', 1875000, 'BN10022'),
+('LDBV10023', '08:40', '2024-01-22', 975000, 'BN10023'),
+('LDBV10024', '16:00', '2024-01-25', 874000, 'BN10024'),
+('LDBV10025', '07:20', '2024-01-26', 1990000, 'BN10025'),
+('LDBV10026', '13:00', '2024-01-28', 2050000, 'BN10026'),
+('LDBV10027', '14:20', '2024-01-31', 1350000, 'BN10027'),
+('LDBV10028', '08:40', '2024-02-02', 7850000, 'BN10028'),
+('LDBV10029', '15:00', '2024-02-06', 2760000, 'BN10029'),
+('LDBV10030', '09:00', '2024-02-09', 2755000, 'BN10030'),
+('LDBV10031', '16:40', '2024-02-13', 2225000, 'BN10031'),
+('LDBV10032', '10:20', '2024-02-16', 1550000, 'BN10032'),
+('LDBV10033', '14:40', '2024-02-19', 975000, 'BN10033'),
+('LDBV10034', '16:20', '2024-02-24', 1450000, 'BN10034'),
+('LDBV10035', '13:20', '2024-02-28', 1650000, 'BN10035'),
+('LDBV10036', '09:40', '2024-02-29', 2000000, 'BN10036'),
+('LDBV10037', '13:40', '2024-03-02', 1765000, 'BN10037'),
+('LDBV10038', '10:20', '2024-03-07', 2320000, 'BN10038'),
+('LDBV10039', '10:20', '2024-03-11', 2055000, 'BN10039'),
+('LDBV10040', '16:00', '2024-03-15', 2400000, 'BN10040'),
+('LDBV10041', '08:40', '2024-03-19', 975000, 'BN10041'),
+('LDBV10042', '14:20', '2024-03-23', 2455000, 'BN10042'),
+('LDBV10043', '09:40', '2024-03-26', 1875000, 'BN10043'),
+('LDBV10044', '13:40', '2024-03-29', 1055000, 'BN10044'),
+('LDBV10045', '07:40', '2024-04-01', 1485000, 'BN10045'),
+('LDBV10046', '10:20', '2024-04-03', 2950000, 'BN10046'),
+('LDBV10047', '14:40', '2024-04-07', 1050000, 'BN10047'),
+('LDBV10048', '14:20', '2024-04-10', 975000, 'BN10048'),
+('LDBV10049', '16:00', '2024-04-13', 3950000, 'BN10049'),
+('LDBV10050', '07:40', '2024-04-19', 4450000, 'BN10050'),
+('LDBV10051', '10:20', '2024-04-22', 2650000, 'BN10051'),
+('LDBV10052', '14:40', '2024-04-25', 2350000, 'BN10052'),
+('LDBV10053', '15:20', '2024-04-25', 1760000, 'BN10053'),
+('LDBV10054', '16:00', '2024-04-25', 3450000, 'BN10054'),
+('LDBV10055', '16:40', '2024-04-25', 1430000, 'BN10055'),
+('LDBV10056', '10:20', '2024-04-26', 1550000, 'BN10056'),
+('LDBV10057', '14:40', '2024-04-27', 1650000, 'BN10057'),
+('LDBV10058', '15:20', '2024-04-27', 2950000, 'BN10058'),
+('LDBV10059', '16:00', '2024-04-27', 1750000, 'BN10059'),
+('LDBV10060', '07:40', '2024-04-28', 1540000, 'BN10060');
 
-DELETE lan_di_benh_vien
+
 -- Table loai_dich_vu
-
 -- Dịch vụ khám bệnh
 INSERT INTO loai_dich_vu (Ma_loai_dich_vu, Ten_dich_vu, Mo_ta, Bang_gia)
 VALUES ('KB', N'Khám bệnh', N'Kiểm tra tình trạng sức khỏe và chẩn đoán bệnh', 46000);
@@ -573,10 +569,8 @@ VALUES
 ('KB10059', 'LDBV10059', 'KB', 'BS10013'),
 ('KB10060', 'LDBV10060', 'KB', 'BS10016');
 
-DELETE lan_su_dung_dich_vu
-where  Ma_loai_dich_vu = 'KB'
 
--- Nội soi [15 đứa]
+-- Nội soi
 INSERT INTO lan_su_dung_dich_vu (Ma_so, Ma_so_lan_di_benh_vien, Ma_loai_dich_vu, Ma_so_nhan_vien)
 VALUES 
 ('NS10005', 'LDBV10005', 'NS', 'BS10015'),
@@ -595,7 +589,7 @@ VALUES
 ('NS10052', 'LDBV10052', 'NS', 'BS10016'),
 ('NS10053', 'LDBV10053', 'NS', 'BS10015');
 
---  Xét nghiệm [18 đứa]
+--  Xét nghiệm
 INSERT INTO lan_su_dung_dich_vu (Ma_so, Ma_so_lan_di_benh_vien, Ma_loai_dich_vu, Ma_so_nhan_vien)
 VALUES 
 ('XN10002', 'LDBV10002', 'XN', 'BS10006'),
@@ -651,7 +645,7 @@ VALUES
 ('SA10026', 'LDBV10026', 'SA', 'BS10014');
 
 
-SELECT * FROM bac_si
+
 -- DV lưu trú
 INSERT INTO lan_su_dung_dich_vu (Ma_so, Ma_so_lan_di_benh_vien, Ma_loai_dich_vu, Ma_so_nhan_vien)
 VALUES ('LT12001', 'LDBV10001', 'LT', 'BS10002'),
@@ -695,10 +689,6 @@ VALUES
 ('NS10048', N'Bệnh viện đa khoa Thủ Đức', N'Nội soi trực tràng', 2150000),
 ('NS10052', N'Bệnh viện đa khoa Thủ Đức', N'Nội soi dạ dày', 2150000),
 ('NS10053', N'Bệnh viện đa khoa Thủ Đức', N'Nội soi phế quản', 2150000);
-
-
-
-
 
 
 --TABLE dich_vu_xet_nghiem
@@ -775,8 +765,6 @@ VALUES
 
 
 -- TABLE dich_vu_kham_benh 
-SELECT * FROM dich_vu_kham_benh
-DELETE dich_vu_kham_benh
 
 INSERT INTO dich_vu_kham_benh (Ma_so, Ket_qua, Chi_phi, Ngay_hen_tiep_theo, Gio_hen_tiep_theo)
 VALUES 
@@ -844,9 +832,6 @@ VALUES
 
 
 --TABLE don_thuoc
-
-DELETE don_thuoc
-
 INSERT INTO don_thuoc (Ma_don_thuoc, Tong_tien_thuoc, Ma_so)
 VALUES 
 ('DT10001', 0, 'KB10001'),
@@ -913,7 +898,7 @@ VALUES
 
 
 
--- TABLE thuoc				<Inserted>
+-- TABLE thuoc
 INSERT INTO thuoc (Ma_thuoc, Ten, Gia_ban, HDSD)
 VALUES 
 ('TH00001', 'Paracetamol', 15000, N'Dùng để hạ sốt và giảm đau'),
@@ -939,7 +924,6 @@ VALUES
 
 
 
---TABLE don_thuoc_gom_thuoc
 --TABLE don_thuoc_gom_thuoc
 INSERT INTO don_thuoc_gom_thuoc (Ma_thuoc, Ma_don_thuoc, So_luong, Lieu_luong)
 VALUES 
@@ -1003,6 +987,7 @@ VALUES
 ('TH00018', 'DT10058', 8, N'Uống khi cần thiết'),
 ('TH00019', 'DT10059', 12, N'Uống mỗi buổi sáng trước khi ăn'),
 ('TH00020', 'DT10060', 15, N'Uống mỗi buổi tối sau khi ăn');
+
 
 -- TABLE dich_vu_luu_tru          
 INSERT INTO dich_vu_luu_tru (Ma_so, Ngay_bat_dau, Ngay_ket_thuc, Tong_chi_phi)
@@ -1074,8 +1059,6 @@ VALUES
 
 
 --TABLE ngay_phong_benh_duoc_su_dung_tai_dich_vu_luu_tru
-SELECT * FROM ngay_phong_benh_duoc_su_dung_tai_dich_vu_luu_tru
-
 INSERT INTO ngay_phong_benh_duoc_su_dung_tai_dich_vu_luu_tru (So_phong, Ma_so_dich_vu_luu_tru, Ngay_su_dung)
 VALUES 
 ('PB21001', 'LT12001', '2024-03-11'),
@@ -1127,7 +1110,6 @@ VALUES
 ('DD10008', 'LT16011');
 
 -- TABLE ngay_tham_gia_cua_dieu_duong_phu_trach_dich_vu_luu_tru
-SELECT * FROM ngay_tham_gia_cua_dieu_duong_phu_trach_dich_vu_luu_tru
 INSERT INTO ngay_tham_gia_cua_dieu_duong_phu_trach_dich_vu_luu_tru (Ma_so_nhan_vien, Ma_so_dich_vu_luu_tru, Ngay_phu_trach)
 VALUES
 ('DD10001', 'LT12001', '2024-03-11'),
@@ -1155,14 +1137,6 @@ VALUES
 
 
 --Table lich_lam_viec
-SELECT * FROM lich_lam_viec
-
-DELETE lich_lam_viec
-
-DROP PROCEDURE InsertLichLamViec_Sang
-
-DROP PROCEDURE InsertLichLamViec_Chieu
-
 
 CREATE PROCEDURE InsertLichLamViec_Sang
     @Ma_so_nhan_vien CHAR(7)
@@ -1272,7 +1246,6 @@ EXEC InsertLichLamViec_Chieu @Ma_so_nhan_vien = 'BS10016';
 
 
 -- TABLE lich_hen_kham
-DELETE FROM lich_hen_kham
 INSERT INTO lich_hen_kham(Ma_lich_hen_kham, Ngay_dat_lich, Gio_den_kham, Ma_so_lan_di_benh_vien, Ma_benh_nhan, So_hieu_ca_lam_viec)
 VALUES
 ('HK10001', '2024-01-01', '09:00:00','LDBV10001', 'BN10001', 'CASA010001'),
@@ -1407,6 +1380,5 @@ SET SDT = CASE
     WHEN Ma_benh_nhan = 'BN10060' THEN '0257022345'
 END;
 ```
-
 
 
