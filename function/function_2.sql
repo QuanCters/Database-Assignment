@@ -1,4 +1,4 @@
-﻿USE assignment2
+USE assignment2
 DROP FUNCTION IF EXISTS Lich_trong 
 GO
 
@@ -42,13 +42,17 @@ BEGIN
 			set @Gio_tan_ca = '17:00:00';
 		END
 
+		SELECT @So_hieu_ca_lam_viec = So_hieu_ca_lam_viec 
+		FROM lich_lam_viec 
+		WHERE @Ma_bac_si = Ma_so_nhan_vien AND Gio_vao = @Gio_vao AND Gio_tan_ca = @Gio_tan_ca AND Ngay = @Ngay;
+
         DECLARE Lich_Cursor CURSOR FOR
-        SELECT  lich_lam_viec.So_hieu_ca_lam_viec ,Gio_den_kham
-        FROM lich_hen_kham INNER JOIN  lich_lam_viec 
-        ON Ma_so_nhan_vien = @Ma_bac_si AND Ngay= @Ngay AND lich_lam_viec.Gio_vao = @Gio_vao;
+        SELECT  Gio_den_kham
+        FROM lich_hen_kham lhk
+        WHERE lhk.So_hieu_ca_lam_viec = @So_hieu_ca_lam_viec;
 
         OPEN Lich_Cursor;
-        FETCH NEXT FROM Lich_Cursor INTO @So_hieu_ca_lam_viec, @Gio_bat_dau ;
+        FETCH NEXT FROM Lich_Cursor INTO @Gio_bat_dau ;
 
         WHILE @@FETCH_STATUS = 0
         BEGIN
@@ -65,8 +69,15 @@ BEGIN
             ELSE
                 SET @Gio_vao = DATEADD(MINUTE, 20, @Gio_vao);
 
-            FETCH NEXT FROM Lich_Cursor INTO @So_hieu_ca_lam_viec, @Gio_bat_dau;
+            FETCH NEXT FROM Lich_Cursor INTO @Gio_bat_dau;
         END
+
+		WHILE @Gio_vao < @Gio_tan_ca
+		BEGIN
+			INSERT INTO @Lich_trong (So_hieu_ca_lam_viec, Gio_bat_dau, Gio_ket_thuc)
+                    VALUES (@So_hieu_ca_lam_viec, @Gio_vao, DATEADD(MINUTE,20,@Gio_vao));
+                    SET @Gio_vao = DATEADD(MINUTE, 20, @Gio_vao)
+		END
     END
     RETURN
 END
@@ -74,5 +85,6 @@ END
 GO
 
 -- SELECT * FROM Lich_trong(N'Nguyễn', N'Văn A', '2024-04-14','Ca 1');
-SELECT * FROM Lich_trong(N'Trần', N'Thị B', '2024-04-14', 'Ca 2');
-SELECT * FROM lich_hen_kham
+-- SELECT * FROM Lich_trong(N'Trần', N'Thị B', '2024-04-14', 'Ca 2');
+-- SELECT * FROM Lich_trong(N'Nguyễn', N'Văn A', '2024-04-14','Ca 1');
+SELECT * FROM lich_trong(N'Nguyễn', N'Thành', '2024-01-01', 'Ca 1');
