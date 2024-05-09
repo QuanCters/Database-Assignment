@@ -139,66 +139,63 @@ GO
 ------------------------------------------------------------------
 ------ TỰ ĐỘNG TĂNG/GIẢM/THAY ĐỔI SoLuongBN_HienTai khi có thao tác đến Ngay_ket_thuc của table dbo.dich_vu_luu_tru 
 
-
+	
 CREATE TRIGGER SoLuongBN_HienTai_NgayKetThuc
 ON dbo.dich_vu_luu_tru
-AFTER INSERT, UPDATE, DELETE
+AFTER UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
-
-    -- Xử lý trong trường hợp INSERT 
-    IF EXISTS (SELECT * FROM inserted) AND NOT EXISTS (SELECT * FROM deleted)
-    BEGIN 
-        UPDATE pb
-        SET pb.So_luong_benh_nhan_hien_tai = pb.So_luong_benh_nhan_hien_tai + 1
-        FROM phong_benh pb
-        INNER JOIN phong_benh_duoc_su_dung_tai_dich_vu_luu_tru pbd ON pb.So_phong = pbd.So_phong
-        INNER JOIN inserted i ON i.Ma_so = pbd.Ma_so_dich_vu_luu_tru
-        WHERE i.Ngay_ket_thuc > GETDATE();
-    END
-
-    -- Xử lý trong trường hợp DELETE (xóa ko cần điều kiện ngày kết thúc)
-    IF EXISTS (SELECT * FROM deleted) AND NOT EXISTS (SELECT * FROM inserted)
-    BEGIN
-        UPDATE pb
-        SET pb.So_luong_benh_nhan_hien_tai = pb.So_luong_benh_nhan_hien_tai - 1
-        FROM phong_benh pb
-        INNER JOIN phong_benh_duoc_su_dung_tai_dich_vu_luu_tru pbd ON pb.So_phong = pbd.So_phong
-        INNER JOIN deleted d ON d.Ma_so = pbd.Ma_so_dich_vu_luu_tru;
-    END
-
-    -- Xử lý trong trường hợp UPDATE 
     IF EXISTS (SELECT * FROM inserted) AND EXISTS (SELECT * FROM deleted)
     BEGIN
-        -- Chỉnh từ [Còn hạn lưu trú] thành hết hạn :V 
-        UPDATE pb
-        SET pb.So_luong_benh_nhan_hien_tai = CASE 
-             WHEN i.Ngay_ket_thuc <= GETDATE() THEN pb.So_luong_benh_nhan_hien_tai - 1
-			 WHEN i.Ngay_ket_thuc <= GETDATE() AND So_luong_benh_nhan_hien_tai < 0 THEN 0
-             ELSE pb.So_luong_benh_nhan_hien_tai
-        END
-        FROM phong_benh pb
-        INNER JOIN phong_benh_duoc_su_dung_tai_dich_vu_luu_tru pbd ON pb.So_phong = pbd.So_phong
-        INNER JOIN inserted i ON i.Ma_so = pbd.Ma_so_dich_vu_luu_tru
-        INNER JOIN deleted d ON d.Ma_so = pbd.Ma_so_dich_vu_luu_tru
-        WHERE d.Ngay_ket_thuc <> i.Ngay_ket_thuc;
+        DECLARE @phong CHAR(10), @ngayKetThuc DATE, @soBN INT, @loaiPhong INT, @maSo CHAR(10);
+
+        DECLARE cursor_services CURSOR FOR
+        SELECT i.Ma_so, i.Ngay_ket_thuc, pbdsd.So_phong
+        FROM inserted i
+        INNER JOIN phong_benh_duoc_su_dung_tai_dich_vu_luu_tru pbdsd ON i.Ma_so = pbdsd.Ma_so_dich_vu_luu_tru;
+
+        OPEN cursor_services
+        FETCH NEXT FROM cursor_services INTO @maSo, @ngayKetThuc, @phong
+
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            SELECT @soBN = So_luong_benh_nhan_hien_tai, @loaiPhong = Loai_phong FROM phong_benh WHERE So_phong = @phong;
+
+            IF @ngayKetThuc > GETDATE() AND @soBN < @loaiPhong
+            BEGIN
+                UPDATE phong_benh
+                SET So_luong_benh_nhan_hien_tai = So_luong_benh_nhan_hien_tai + 1
+                WHERE So_phong = @phong;
+                PRINT N'Gia hạn thành công dịch vụ lưu trú - Vui lòng kiểm tra lại trong phòng bệnh hiện tại';
+            END
+            ELSE IF @ngayKetThuc > GETDATE() AND @soBN >= @loaiPhong
+            BEGIN
+                PRINT N'Phòng bệnh trước đây bạn từng lưu trú hiện đã đầy, vui lòng chọn phòng khác';
+				ROLLBACK TRANSACTION;
+				RETURN;
+            END
 
 
-        -- Chỉnh từ [hết hạn] thành  [Còn hạn lưu trú] :V 
-        UPDATE pb
-        SET pb.So_luong_benh_nhan_hien_tai = CASE 
-             WHEN i.Ngay_ket_thuc > GETDATE() THEN pb.So_luong_benh_nhan_hien_tai + 1
-             ELSE pb.So_luong_benh_nhan_hien_tai
+            IF @ngayKetThuc <= GETDATE()
+            BEGIN
+                UPDATE phong_benh
+                SET So_luong_benh_nhan_hien_tai = CASE 
+                    WHEN So_luong_benh_nhan_hien_tai - 1 < 0 THEN 0
+                    ELSE So_luong_benh_nhan_hien_tai - 1
+                END
+                WHERE So_phong = @phong;
+                PRINT N'Kết thúc DV lưu trú thành công! - Vui lòng kiểm tra lại trong phòng bệnh hiện tại';
+            END
+
+            FETCH NEXT FROM cursor_services INTO @maSo, @ngayKetThuc, @phong
         END
-        FROM phong_benh pb
-        INNER JOIN phong_benh_duoc_su_dung_tai_dich_vu_luu_tru pbd ON pb.So_phong = pbd.So_phong
-        INNER JOIN inserted i ON i.Ma_so = pbd.Ma_so_dich_vu_luu_tru
-        INNER JOIN deleted d ON d.Ma_so = pbd.Ma_so_dich_vu_luu_tru
-        WHERE d.Ngay_ket_thuc <> i.Ngay_ket_thuc;
-		PRINT N'Đã gia hạn/kết thúc DV lưu trú thành công! - Vui lòng kiểm tra lại trong phòng bệnh hiện tại';
+
+        CLOSE cursor_services;
+        DEALLOCATE cursor_services;
     END
 END;
+GO
 
 
 
