@@ -75,32 +75,19 @@ VALUES ('TH00002', 'DT01111', 14, N'Uống 2 viên mỗi lần'),
 
 SELECT * FROM don_thuoc
 
---DELETE don_thuoc_gom_thuoc
---WHERE Ma_don_thuoc = 'DT01115'   
-
---Trường hợp 2: Thêm thuốc vào đơn thuốc vượt quá 7 ngày
-SELECT * FROM don_thuoc
 
 
-
-
-
-DELETE don_thuoc_gom_thuoc
-WHERE Ma_don_thuoc = 'DT01111' 
-
-SELECT * FROM don_thuoc
-
-
---Trường hợp 3: Thêm thuốc có số lượng âm / 0  vào đơn thuốc không vượt quá 7 ngày
-SELECT * FROM don_thuoc
+-- Trường hợp 2: Thêm thuốc có số lượng âm hoặc bằng 0 vào đơn thuốc vượt quá 7 ngày kể từ ngày đi khám
+SELECT * FROM don_thuoc;
 
 INSERT INTO don_thuoc_gom_thuoc (Ma_thuoc, Ma_don_thuoc, So_luong, Lieu_luong)
 VALUES ('TH00009', 'DT01113', -2, N'Uống 0.5 viên mỗi lần');
 
-SELECT * FROM don_thuoc
+SELECT * FROM don_thuoc;
 
 
---Trường hợp 4: Xóa 1 số loại thuốc khỏi đơn thuốc trước 7 ngày kể từ ngày đi khám
+	
+--Trường hợp 3: Xóa một số loại thuốc khỏi đơn thuốc trước 7 ngày kể từ ngày đi khám.
 SELECT * FROM don_thuoc
 
 DELETE don_thuoc_gom_thuoc
@@ -108,16 +95,17 @@ WHERE Ma_don_thuoc = 'DT01112' AND Ma_thuoc = 'TH00004'
 
 SELECT * FROM don_thuoc
 
---Trường hợp 5: Xóa thuốc không tồn tại trong đơn thuốc trước 7 ngày kể từ ngày đi khám
-SELECT * FROM don_thuoc
+
+
+--Trường hợp 4: Xóa thuốc không tồn tại trong đơn thuốc trước 7 ngày kể từ ngày đi khám
+SELECT * FROM don_thuoc;
 
 DELETE don_thuoc_gom_thuoc
-WHERE Ma_don_thuoc = 'DT01113' AND Ma_thuoc = 'TH00020'
+WHERE Ma_don_thuoc = 'DT01113' AND Ma_thuoc = 'TH00020';
 
-SELECT * FROM don_thuoc
+SELECT * FROM don_thuoc;
 
-
---Trường hợp 6: Xóa 1 số loại thuốc khỏi đơn thuốc đã vượt 7 ngày kể từ ngày đi khám
+--Trường hợp 5: Xóa một số loại thuốc khỏi đơn thuốc đã vượt quá 7 ngày kể từ ngày đi khám
 SELECT * FROM don_thuoc;
 
 DELETE don_thuoc_gom_thuoc
@@ -126,7 +114,8 @@ WHERE Ma_don_thuoc = 'DT10001' AND Ma_thuoc = 'TH00001';
 SELECT * FROM don_thuoc;
 
 
---Trường hợp 7: Thay đổi 1 số loại thuốc trong đơn thuốc trước 7 ngày kể từ ngày đi khám
+
+--Trường hợp 6: Thay đổi một số loại thuốc trong đơn thuốc trước 7 ngày kể từ ngày đi khám 
 SELECT * FROM don_thuoc;
 
 UPDATE dbo.don_thuoc_gom_thuoc
@@ -136,7 +125,8 @@ WHERE Ma_don_thuoc = 'DT01113' AND Ma_thuoc = 'TH00003';
 SELECT * FROM don_thuoc;
 
 
---Trường hợp 8: Thay đổi số lượng một loại thuốc thành số âm hoặc 0
+
+--Trường hợp 7: Thay đổi số lượng một loại thuốc thành số âm hoặc bằng 0
 SELECT * FROM don_thuoc;
 
 UPDATE dbo.don_thuoc_gom_thuoc
@@ -146,41 +136,13 @@ WHERE Ma_don_thuoc = 'DT01114' AND Ma_thuoc = 'TH00006';
 SELECT * FROM don_thuoc;
 
 
---Trường hợp 9: Thay đổi 1 số loại thuốc trong đơn thuốc đã vượt 7 ngày kể từ ngày đi khám
-SELECT * FROM thuoc
+
+--Trường hợp 8: Thay đổi một số lượng trong đơn thuốc đã vượt quá 7 ngày kể từ ngày đi khám
+SELECT * FROM don_thuoc;
 
 UPDATE dbo.don_thuoc_gom_thuoc
 SET So_luong = 5
 WHERE Ma_don_thuoc = 'DT10001' AND Ma_thuoc = 'TH00001';
 
-SELECT * FROM thuoc
-
-
---Trường hợp 10: Thay đổi mã thuốc một loại thuốc trong đơn thuốc trước 7 ngày kể từ ngày đi khám
 SELECT * FROM don_thuoc;
 
-UPDATE dbo.don_thuoc_gom_thuoc
-SET Ma_thuoc = 'TH00018'
-WHERE Ma_don_thuoc = 'DT01114' AND Ma_thuoc = 'TH00004';
-
-SELECT * FROM don_thuoc;
-
-
-
-
-
-
-
-
-
-
-INSERT INTO don_thuoc_gom_thuoc (Ma_thuoc, Ma_don_thuoc, So_luong, Lieu_luong)
-VALUES ('TH00003', 'DT01113', 7, N'Uống 0.5 viên mỗi lần'),
-	   ('TH00005', 'DT01113', 14, N'Uống 2 viên mỗi lần');
-
-INSERT INTO don_thuoc_gom_thuoc (Ma_thuoc, Ma_don_thuoc, So_luong, Lieu_luong)
-VALUES ('TH00004', 'DT01114', 14, N'Uống 2 viên mỗi lần'),
-	   ('TH00006', 'DT01114', 14, N'Uống 2 viên mỗi lần');
-
-INSERT INTO don_thuoc_gom_thuoc (Ma_thuoc, Ma_don_thuoc, So_luong, Lieu_luong)
-VALUES ('TH00005', 'DT01115', 28, N'Uống 1 viên mỗi lần');
