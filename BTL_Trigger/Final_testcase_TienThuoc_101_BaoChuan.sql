@@ -12,9 +12,10 @@ SELECT * FROM dich_vu_kham_benh
 SELECT * FROM don_thuoc
 SELECT * FROM don_thuoc_gom_thuoc
 
-DELETE don_thuoc
-WHERE Tong_tien_thuoc = 0
 
+	 --Testcase bên dưới 
+-----------------------------------------------------------------------------------------------------------
+--Thực hiện tạo dữ liệu mới trong bảng benh_nhan, bảng lan_di_benh_vien, bảng lan_su_dung_dich_vu, bảng  dich_vu_kham_benh và bảng don_thuoc trước khi kiểm tra từng trường hợp bên dưới. 
 INSERT INTO benh_nhan (Ma_benh_nhan, CCCD, Ho, Ten, Dia_chi, Email, Gioi_tinh, Ngay_sinh)
 VALUES ('BN001111', '376589123012', N'Trần ', N'Duy', N'Thanh Hóa', 'tranduy@example.com', N'Nam', '1980-03-15'),
 	   ('BN001112', '354909123012', N'Lê ', N' Duy Khánh', N'Quảng Bình', 'ldkhanh@example.com', N'Nam', '2004-11-23'),
