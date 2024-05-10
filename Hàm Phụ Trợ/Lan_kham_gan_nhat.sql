@@ -6,7 +6,7 @@ CREATE FUNCTION Lan_kham_gan_nhat()
 RETURNS @Danh_sach TABLE (
 	ID CHAR(10),
 	Ho_ten NVARCHAR(60),
-	SDT CHAR(10),
+	SĐT CHAR(10),
 	Ngay_hen DATE,
 	Gio_hen TIME
 )
