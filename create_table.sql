@@ -13,7 +13,8 @@ CREATE TABLE nhan_vien (
     Ngay_ky_hop_dong	DATE,
     Luong			INT,
     Ngay_sinh		DATE,
-    SĐT             CHAR(10)
+    SĐT             CHAR(10),
+    is_delete          BIT DEFAULT 0	
 );
 CREATE TABLE bac_si (
 	Ma_so_nhan_vien	CHAR(10) PRIMARY KEY,
