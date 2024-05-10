@@ -20,7 +20,8 @@ BEGIN
         RETURN 0;
     END;
 
-    DELETE FROM nhan_vien
+    UPDATE nhan_vien
+    SET is_delete = 1
     WHERE Ma_so_nhan_vien = @Ma_so_nhan_vien;
 
     PRINT N'Xóa nhân viên thành công.';
