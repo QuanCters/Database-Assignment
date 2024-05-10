@@ -15,7 +15,7 @@ BEGIN
 	DECLARE @ID_benh_nhan CHAR(10);
 	DECLARE @Ho NVARCHAR(20);
 	DECLARE @Ten NVARCHAR(40);
-	DECLARE @SDT CHAR(10);
+	DECLARE @SĐT CHAR(10);
 	DECLARE @Ho_ten NVARCHAR(60);
 	DECLARE @Ngay_hen DATE;
 	DECLARE @Gio_hen TIME;
@@ -31,7 +31,7 @@ BEGIN
 		SELECT 
 			@Ho = Ho,
 			@Ten = Ten,
-			@SDT = SDT
+			@SĐT = SĐT
 		FROM 
 			benh_nhan 
 		WHERE 
@@ -44,7 +44,7 @@ BEGIN
 			lan_di_benh_vien
 		WHERE
 			Ma_benh_nhan = @ID_benh_nhan;
-		INSERT INTO @Danh_sach VALUES (@ID_benh_nhan, @Ho_ten, @SDT, @Ngay_hen, @Gio_hen);
+		INSERT INTO @Danh_sach VALUES (@ID_benh_nhan, @Ho_ten, @SĐT, @Ngay_hen, @Gio_hen);
 		FETCH NEXT FROM ID_Cursor INTO @ID_benh_nhan;
 
 	END
